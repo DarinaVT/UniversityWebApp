@@ -1,0 +1,42 @@
+@inject SignInManager<ApplicationUser> SignInManager
+@{
+    var hasExternalLogins = (await SignInManager.GetExternalAuthenticationSchemesAsync()).Any();
+}
+
+<div class="manage-nav-container">
+    <ul class="manage-nav-list">
+        <li class="manage-nav-item">
+            <a class="manage-nav-link @ManageNavPages.EmailNavClass(ViewContext)" id="email" asp-page="./Email">
+                <i class="bi bi-envelope me-2"></i>
+                <span>@Localizer["EmailLabel"]</span>
+            </a>
+        </li>
+        <li class="manage-nav-item">
+            <a class="manage-nav-link @ManageNavPages.ChangePasswordNavClass(ViewContext)" id="change-password" asp-page="./ChangePassword">
+                <i class="bi bi-key me-2"></i>
+                <span>@Localizer["PasswordLabel"]</span>
+            </a>
+        </li>
+        @if (hasExternalLogins)
+        {
+            <li class="manage-nav-item" id="external-logins">
+                <a class="manage-nav-link @ManageNavPages.ExternalLoginsNavClass(ViewContext)" id="external-login" asp-page="./ExternalLogins">
+                    <i class="bi bi-link-45deg me-2"></i>
+                    <span>@Localizer["ExternalLogins"]</span>
+                </a>
+            </li>
+        }
+        <li class="manage-nav-item">
+            <a class="manage-nav-link @ManageNavPages.TwoFactorAuthenticationNavClass(ViewContext)" id="two-factor" asp-page="./TwoFactorAuthentication">
+                <i class="bi bi-shield-lock me-2"></i>
+                <span>@Localizer["TwoFactorAuthentication"]</span>
+            </a>
+        </li>
+        <li class="manage-nav-item">
+            <a class="manage-nav-link @ManageNavPages.PersonalDataNavClass(ViewContext)" id="personal-data" asp-page="./PersonalData">
+                <i class="bi bi-file-earmark-person me-2"></i>
+                <span>@Localizer["PersonalData"]</span>
+            </a>
+        </li>
+    </ul>
+</div>

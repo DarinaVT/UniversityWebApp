@@ -1,0 +1,38 @@
+﻿@page
+@model DeletePersonalDataModel
+@{
+    ViewData["Title"] = "Delete Personal Data";
+    ViewData["ActivePage"] = ManageNavPages.PersonalData;
+}
+
+<div class="manage-page-content">
+    <h2 class="manage-page-title">@ViewData["Title"]</h2>
+    
+    <div class="manage-form-card">
+        <div class="alert alert-danger">
+            <strong><i class="bi bi-exclamation-triangle-fill me-2"></i>Warning:</strong>
+            <p class="mb-0 mt-2">Deleting this data will permanently remove your account, and this cannot be recovered.</p>
+        </div>
+        
+        <form id="delete-user" method="post" class="mt-4">
+            <div asp-validation-summary="ModelOnly" class="text-danger" role="alert"></div>
+            
+            @if (Model.RequirePassword)
+            {
+                <div class="form-floating mb-3">
+                    <input asp-for="Input.Password" class="form-control" autocomplete="current-password" aria-required="true" placeholder="Please enter your password." />
+                    <label asp-for="Input.Password" class="form-label">Password</label>
+                    <span asp-validation-for="Input.Password" class="text-danger"></span>
+                </div>
+            }
+            
+            <button class="w-100 btn btn-lg btn-danger" type="submit">
+                <i class="bi bi-trash-fill me-2"></i>Delete data and close my account
+            </button>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

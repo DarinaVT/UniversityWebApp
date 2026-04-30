@@ -1,0 +1,27 @@
+﻿@page
+@model DownloadPersonalDataModel
+@{
+    ViewData["Title"] = "Download Your Data";
+    ViewData["ActivePage"] = ManageNavPages.PersonalData;
+}
+
+<div class="manage-page-content">
+    <h2 class="manage-page-title">@ViewData["Title"]</h2>
+    
+    <div class="manage-form-card">
+        <div class="personal-data-info">
+            <p class="mb-3">
+                <i class="bi bi-info-circle me-2 text-primary"></i>
+                Your personal data is being prepared for download. This may take a few moments.
+            </p>
+            <div class="alert alert-info">
+                <i class="bi bi-hourglass-split me-2"></i>
+                <strong>Processing...</strong> Please wait while we prepare your data.
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

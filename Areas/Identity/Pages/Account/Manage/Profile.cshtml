@@ -1,0 +1,304 @@
+@page
+@model ProfileModel
+@using Microsoft.AspNetCore.Identity
+@inject UserManager<ApplicationUser> UserManager
+@{
+    ViewData["Title"] = Localizer["Profile"].Value;
+    ViewData["ActivePage"] = ManageNavPages.Profile;
+    var user = await UserManager.GetUserAsync(User);
+    var userName = user?.UserName ?? user?.Email ?? "User";
+    var displayName = userName; // Display name is same as username
+    var profilePic = user?.ProfilePictureUrl;
+}
+
+<div class="profile-page-container">
+    <h1 class="page-title">@Localizer["Profile"]</h1>
+    
+    @if (Model.IsAdmin)
+    {
+        <div class="settings-card">
+            <p class="text-center">@Localizer["AdministratorsCannotSubmitReviews"]</p>
+        </div>
+    }
+    else
+    {
+        <div class="profile-grid">
+            
+            <div class="profile-left-column">
+                
+                <div class="settings-card profile-card">
+                    <div class="profile-photo-section">
+                        <form method="post" asp-page-handler="ChangePhoto" enctype="multipart/form-data" class="profile-photo-form">
+                            @Html.AntiForgeryToken()
+                            <input type="file" name="photo" accept="image/*" class="profile-photo-input" id="photoInput" onchange="previewPhoto(this)" />
+                            <label for="photoInput" class="profile-photo-label">
+                                @if (!string.IsNullOrEmpty(profilePic))
+                                {
+                                    <img src="@profilePic" alt="Profile" class="profile-avatar" id="profileAvatar" />
+                                }
+                                else
+                                {
+                                    <div class="profile-avatar-placeholder" id="profileAvatarPlaceholder">
+                                        <i class="bi bi-person-circle"></i>
+                                    </div>
+                                }
+                                <div class="profile-photo-overlay">
+                                    <i class="bi bi-pencil-fill"></i>
+                                </div>
+                            </label>
+                        </form>
+                    </div>
+                    <div class="profile-username">@userName</div>
+                    <div class="profile-email">@user?.Email</div>
+                </div>
+            </div>
+
+            
+            <div class="profile-middle-column">
+                
+                <div class="profile-circle-charts">
+                    <div class="profile-circle-chart-card">
+                        <div class="profile-circle-chart-container">
+                            <canvas id="totalReviewsChart"></canvas>
+                        </div>
+                        <div class="profile-circle-chart-label">@Localizer["TotalReviews"]</div>
+                        <div class="profile-circle-chart-value">@Model.TotalReviews</div>
+                    </div>
+                    <div class="profile-circle-chart-card">
+                        <div class="profile-circle-chart-container">
+                            <canvas id="approvedReviewsChart"></canvas>
+                        </div>
+                        <div class="profile-circle-chart-label">@Localizer["Approved"]</div>
+                        <div class="profile-circle-chart-value approved">@Model.ApprovedCount</div>
+                    </div>
+                    <div class="profile-circle-chart-card">
+                        <div class="profile-circle-chart-container">
+                            <canvas id="pendingReviewsChart"></canvas>
+                        </div>
+                        <div class="profile-circle-chart-label">@Localizer["Pending"]</div>
+                        <div class="profile-circle-chart-value pending">@Model.PendingCount</div>
+                    </div>
+                    <div class="profile-circle-chart-card">
+                        <div class="profile-circle-chart-container">
+                            <canvas id="favouritesChart"></canvas>
+                        </div>
+                        <div class="profile-circle-chart-label">@Localizer["Favourites"]</div>
+                        <div class="profile-circle-chart-value">@Model.FavouritesCount</div>
+                    </div>
+                </div>
+                @if (Model.ApprovedReviews.Any())
+                {
+                    <div class="settings-card">
+                        <h3 class="settings-section-title">
+                            <i class="bi bi-check-circle-fill text-success me-2"></i>@Localizer["ApprovedReviews"] (@Model.ApprovedCount)
+                        </h3>
+                        <div class="table-responsive">
+                            <table class="reviews-table">
+                                <thead>
+                                    <tr>
+                                        <th>@Localizer["University"]</th>
+                                        <th>@Localizer["Rating"]</th>
+                                        <th>@Localizer["Comment"]</th>
+                                        <th>@Localizer["Date"]</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var review in Model.ApprovedReviews)
+                                    {
+                                        <tr>
+                                            <td>
+                                                <a asp-area="" asp-controller="Universities" asp-action="Details" asp-route-id="@review.UniversityId">
+                                                    @review.UniversityName
+                                                </a>
+                                            </td>
+                                            <td>
+                                                @for (int i = 0; i < 5; i++)
+                                                {
+                                                    <i class="bi bi-star-fill @(i < review.Rating ? "text-warning" : "text-muted")"></i>
+                                                }
+                                            </td>
+                                            <td>@(review.Comment.Length > 100 ? review.Comment.Substring(0, 100) + "..." : review.Comment)</td>
+                                            <td>@review.CreatedAt.ToString("MMM dd, yyyy")</td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                }
+
+                @if (Model.PendingReviews.Any())
+                {
+                    <div class="settings-card">
+                        <h3 class="settings-section-title">
+                            <i class="bi bi-clock-history text-warning me-2"></i>@Localizer["PendingReviews"] (@Model.PendingCount)
+                        </h3>
+                        <div class="table-responsive">
+                            <table class="reviews-table">
+                                <thead>
+                                    <tr>
+                                        <th>@Localizer["University"]</th>
+                                        <th>@Localizer["Rating"]</th>
+                                        <th>@Localizer["Comment"]</th>
+                                        <th>@Localizer["Date"]</th>
+                                        <th>@Localizer["Status"]</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var review in Model.PendingReviews)
+                                    {
+                                        <tr>
+                                            <td>
+                                                <a asp-area="" asp-controller="Universities" asp-action="Details" asp-route-id="@review.UniversityId">
+                                                    @review.UniversityName
+                                                </a>
+                                            </td>
+                                            <td>
+                                                @for (int i = 0; i < 5; i++)
+                                                {
+                                                    <i class="bi bi-star-fill @(i < review.Rating ? "text-warning" : "text-muted")"></i>
+                                                }
+                                            </td>
+                                            <td>@(review.Comment.Length > 100 ? review.Comment.Substring(0, 100) + "..." : review.Comment)</td>
+                                            <td>@review.CreatedAt.ToString("MMM dd, yyyy")</td>
+                                            <td><span class="badge bg-warning text-dark">@Localizer["Pending"]</span></td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                }
+
+                @if (!Model.ApprovedReviews.Any() && !Model.PendingReviews.Any())
+                {
+                    <div class="settings-card">
+                        <p class="text-center">You haven't submitted any reviews yet.</p>
+                    </div>
+                }
+            </div>
+            
+        </div>
+    }
+</div>
+
+@section Scripts {
+    <script>
+        function previewPhoto(input) {
+            if (input.files && input.files[0]) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    const avatar = document.getElementById('profileAvatar');
+                    const placeholder = document.getElementById('profileAvatarPlaceholder');
+                    if (avatar) {
+                        avatar.src = e.target.result;
+                    } else if (placeholder) {
+                        placeholder.innerHTML = `<img src="${e.target.result}" alt="Profile" class="profile-avatar" id="profileAvatar" />`;
+                    }
+                    input.closest('form').submit();
+                };
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            const totalReviews = @Model.TotalReviews;
+            const approvedCount = @Model.ApprovedCount;
+            const pendingCount = @Model.PendingCount;
+            const favouritesCount = @Model.FavouritesCount;
+            const maxValue = Math.max(totalReviews, approvedCount, pendingCount, favouritesCount, 1);
+
+            const totalCtx = document.getElementById('totalReviewsChart');
+            if (totalCtx) {
+                const totalPercent = maxValue > 0 ? (totalReviews / maxValue) * 100 : 0;
+                new Chart(totalCtx, {
+                    type: 'doughnut',
+                    data: {
+                        datasets: [{
+                            data: [totalPercent, 100 - totalPercent],
+                            backgroundColor: ['#4F46E5', '#E5E7EB'],
+                            borderWidth: 0
+                        }]
+                    },
+                    options: {
+                        cutout: '75%',
+                        plugins: {
+                            legend: { display: false },
+                            tooltip: { enabled: false }
+                        },
+                        maintainAspectRatio: false
+                    }
+                });
+            }
+
+            const approvedCtx = document.getElementById('approvedReviewsChart');
+            if (approvedCtx) {
+                const approvedPercent = maxValue > 0 ? (approvedCount / maxValue) * 100 : 0;
+                new Chart(approvedCtx, {
+                    type: 'doughnut',
+                    data: {
+                        datasets: [{
+                            data: [approvedPercent, 100 - approvedPercent],
+                            backgroundColor: ['#10B981', '#E5E7EB'],
+                            borderWidth: 0
+                        }]
+                    },
+                    options: {
+                        cutout: '75%',
+                        plugins: {
+                            legend: { display: false },
+                            tooltip: { enabled: false }
+                        },
+                        maintainAspectRatio: false
+                    }
+                });
+            }
+
+            const pendingCtx = document.getElementById('pendingReviewsChart');
+            if (pendingCtx) {
+                const pendingPercent = maxValue > 0 ? (pendingCount / maxValue) * 100 : 0;
+                new Chart(pendingCtx, {
+                    type: 'doughnut',
+                    data: {
+                        datasets: [{
+                            data: [pendingPercent, 100 - pendingPercent],
+                            backgroundColor: ['#F59E0B', '#E5E7EB'],
+                            borderWidth: 0
+                        }]
+                    },
+                    options: {
+                        cutout: '75%',
+                        plugins: {
+                            legend: { display: false },
+                            tooltip: { enabled: false }
+                        },
+                        maintainAspectRatio: false
+                    }
+                });
+            }
+
+            const favouritesCtx = document.getElementById('favouritesChart');
+            if (favouritesCtx) {
+                const favouritesPercent = maxValue > 0 ? (favouritesCount / maxValue) * 100 : 0;
+                new Chart(favouritesCtx, {
+                    type: 'doughnut',
+                    data: {
+                        datasets: [{
+                            data: [favouritesPercent, 100 - favouritesPercent],
+                            backgroundColor: ['#7C3AED', '#E5E7EB'],
+                            borderWidth: 0
+                        }]
+                    },
+                    options: {
+                        cutout: '75%',
+                        plugins: {
+                            legend: { display: false },
+                            tooltip: { enabled: false }
+                        },
+                        maintainAspectRatio: false
+                    }
+                });
+            }
+        });
+    </script>
+}

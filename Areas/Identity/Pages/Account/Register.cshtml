@@ -1,0 +1,123 @@
+﻿@page
+@model RegisterModel
+@{
+    ViewData["Title"] = Localizer["Register"].Value;
+}
+
+<div class="register-page-container">
+    
+    <div class="register-gradient-side"></div>
+    
+    
+    <div class="register-form-side">
+        <div class="register-form-wrapper">
+            <h1 class="register-title">@Localizer["CreateAnAccount"]</h1>
+            <p class="register-subtitle">
+                @Localizer["AlreadyHaveAccount"] <a asp-page="./Login" asp-route-returnUrl="@Model.ReturnUrl" class="login-link">@Localizer["LogIn"]</a>
+            </p>
+
+            <form id="registerForm" asp-route-returnUrl="@Model.ReturnUrl" method="post" class="register-form">
+                <div asp-validation-summary="ModelOnly" class="text-danger mb-3" role="alert"></div>
+                
+                <div class="form-group mb-3">
+                    <label asp-for="Input.Email" class="form-label">@Localizer["EmailAddressDisplay"]</label>
+                    <input asp-for="Input.Email" class="form-control" autocomplete="username" aria-required="true" />
+                    <span asp-validation-for="Input.Email" class="text-danger"></span>
+                </div>
+
+                <div class="form-group mb-3">
+                    <div class="password-field-wrapper">
+                        <label asp-for="Input.Password" class="form-label">@Localizer["Password"]</label>
+                        <div class="password-input-group">
+                            <input asp-for="Input.Password" type="password" class="form-control" id="registerPasswordInput" autocomplete="new-password" aria-required="true" />
+                            <button type="button" class="password-toggle" id="registerPasswordToggle">
+                                <i class="bi bi-eye" id="registerPasswordIcon"></i>
+                                <span id="registerPasswordToggleText">@Localizer["Show"]</span>
+                            </button>
+                        </div>
+                    </div>
+                    <small class="form-text text-muted">@Localizer["Use8OrMore"]</small>
+                    <span asp-validation-for="Input.Password" class="text-danger"></span>
+                </div>
+
+                <div class="form-group mb-3">
+                    <div class="password-field-wrapper">
+                        <label asp-for="Input.ConfirmPassword" class="form-label">@Localizer["ConfirmPassword"]</label>
+                        <div class="password-input-group">
+                            <input asp-for="Input.ConfirmPassword" type="password" class="form-control" id="confirmPasswordInput" autocomplete="new-password" aria-required="true" />
+                            <button type="button" class="password-toggle" id="confirmPasswordToggle">
+                                <i class="bi bi-eye" id="confirmPasswordIcon"></i>
+                                <span id="confirmPasswordToggleText">@Localizer["Show"]</span>
+                            </button>
+                        </div>
+                    </div>
+                    <span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
+                </div>
+
+                <div class="terms-privacy mb-3">
+                    <p class="terms-text">
+                        @Localizer["ByCreatingAccount"] <a href="#" class="terms-link">@Localizer["TermsOfUse"]</a> @Localizer["And"] <a href="#" class="terms-link">@Localizer["PrivacyPolicy"]</a>
+                    </p>
+                </div>
+
+                <button id="registerSubmit" type="submit" class="register-button">@Localizer["CreateAnAccount"]</button>
+            </form>
+
+            <p class="register-footer">
+                @Localizer["AlreadyHaveAccount"] <a asp-page="./Login" asp-route-returnUrl="@Model.ReturnUrl" class="login-link">@Localizer["LogIn"]</a>
+            </p>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const showText = @Html.Raw(Json.Serialize(Localizer["Show"].Value));
+            const hideText = @Html.Raw(Json.Serialize(Localizer["Hide"].Value));
+            
+            const registerPasswordInput = document.getElementById('registerPasswordInput');
+            const registerPasswordToggle = document.getElementById('registerPasswordToggle');
+            const registerPasswordIcon = document.getElementById('registerPasswordIcon');
+            const registerPasswordToggleText = document.getElementById('registerPasswordToggleText');
+            
+            if (registerPasswordToggle && registerPasswordInput && registerPasswordIcon && registerPasswordToggleText) {
+                registerPasswordToggle.addEventListener('click', function() {
+                    if (registerPasswordInput.type === 'password') {
+                        registerPasswordInput.type = 'text';
+                        registerPasswordIcon.classList.remove('bi-eye');
+                        registerPasswordIcon.classList.add('bi-eye-slash');
+                        registerPasswordToggleText.textContent = hideText;
+                    } else {
+                        registerPasswordInput.type = 'password';
+                        registerPasswordIcon.classList.remove('bi-eye-slash');
+                        registerPasswordIcon.classList.add('bi-eye');
+                        registerPasswordToggleText.textContent = showText;
+                    }
+                });
+            }
+            
+            const confirmPasswordInput = document.getElementById('confirmPasswordInput');
+            const confirmPasswordToggle = document.getElementById('confirmPasswordToggle');
+            const confirmPasswordIcon = document.getElementById('confirmPasswordIcon');
+            const confirmPasswordToggleText = document.getElementById('confirmPasswordToggleText');
+            
+            if (confirmPasswordToggle && confirmPasswordInput && confirmPasswordIcon && confirmPasswordToggleText) {
+                confirmPasswordToggle.addEventListener('click', function() {
+                    if (confirmPasswordInput.type === 'password') {
+                        confirmPasswordInput.type = 'text';
+                        confirmPasswordIcon.classList.remove('bi-eye');
+                        confirmPasswordIcon.classList.add('bi-eye-slash');
+                        confirmPasswordToggleText.textContent = hideText;
+                    } else {
+                        confirmPasswordInput.type = 'password';
+                        confirmPasswordIcon.classList.remove('bi-eye-slash');
+                        confirmPasswordIcon.classList.add('bi-eye');
+                        confirmPasswordToggleText.textContent = showText;
+                    }
+                });
+            }
+        });
+    </script>
+}

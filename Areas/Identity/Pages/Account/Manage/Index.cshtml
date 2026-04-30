@@ -1,0 +1,202 @@
+﻿@page
+@model IndexModel
+@using Microsoft.AspNetCore.Identity
+@inject UserManager<ApplicationUser> UserManager
+@{
+    ViewData["Title"] = Localizer["Settings"].Value;
+    ViewData["ActivePage"] = ManageNavPages.Index;
+    var user = await UserManager.GetUserAsync(User);
+    var userName = user?.UserName ?? user?.Email ?? "User";
+    var displayName = userName; // Display name is same as username
+    var profilePic = user?.ProfilePictureUrl;
+}
+
+<div class="settings-page-container">
+    <div class="settings-grid">
+        
+        <div class="settings-left-column">
+            <div class="settings-card profile-card">
+                <div class="profile-photo-section">
+                    <form method="post" asp-page-handler="ChangePhoto" enctype="multipart/form-data" class="profile-photo-form">
+                        @Html.AntiForgeryToken()
+                        <input type="file" name="photo" accept="image/*" class="profile-photo-input" id="photoInput" onchange="previewPhoto(this)" />
+                        <label for="photoInput" class="profile-photo-label">
+                            @if (!string.IsNullOrEmpty(profilePic))
+                            {
+                                <img src="@profilePic" alt="Profile" class="profile-avatar" id="profileAvatar" />
+                            }
+                            else
+                            {
+                                <div class="profile-avatar-placeholder" id="profileAvatarPlaceholder">
+                                    <i class="bi bi-person-circle"></i>
+                                </div>
+                            }
+                            <div class="profile-photo-overlay">
+                                <i class="bi bi-pencil-fill"></i>
+                            </div>
+                        </label>
+                    </form>
+                </div>
+                <div class="profile-username">@userName</div>
+                <div class="profile-email">@user?.Email</div>
+            </div>
+        </div>
+
+        
+        <div class="settings-middle-column" style="width: 100%; max-width: 100%;">
+            
+            <div class="settings-card">
+                <h2 class="settings-section-title">@Localizer["PersonalDetails"]</h2>
+                <form method="post" class="settings-form">
+                    @Html.AntiForgeryToken()
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    
+                    <div class="form-group">
+                        <label asp-for="Input.UserName" class="form-label">@Localizer["Username"] / @Localizer["DisplayName"]</label>
+                        <input asp-for="Input.UserName" class="form-control" id="userNameInput" />
+                        <span asp-validation-for="Input.UserName" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group" style="display: none;">
+                        <label asp-for="Input.DisplayName" class="form-label">Display Name</label>
+                        <input asp-for="Input.DisplayName" class="form-control" id="displayNameInput" />
+                        <span asp-validation-for="Input.DisplayName" class="text-danger"></span>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary">@Localizer["SaveChanges"]</button>
+                </form>
+            </div>
+
+            
+            <div class="settings-card">
+                <h2 class="settings-section-title">@Localizer["Email"]</h2>
+                <p class="settings-subtitle">@Localizer["CurrentEmail"]: <strong>@user?.Email</strong></p>
+                <form method="post" asp-page="./Email" asp-page-handler="ChangeEmail" class="settings-form">
+                    @Html.AntiForgeryToken()
+                    <div class="form-group">
+                        <label class="form-label">@Localizer["NewEmail"]</label>
+                        <input type="email" name="Input.NewEmail" class="form-control" required />
+                    </div>
+                    <button type="submit" class="btn btn-primary">@Localizer["ChangeEmail"]</button>
+                </form>
+            </div>
+
+            
+            <div class="settings-card">
+                <h2 class="settings-section-title">@Localizer["Password"]</h2>
+                <p class="settings-subtitle">@Localizer["ChangeYourPassword"]</p>
+                <form method="post" asp-page="./ChangePassword" class="settings-form">
+                    @Html.AntiForgeryToken()
+                    <div class="form-group">
+                        <label class="form-label">@Localizer["CurrentPassword"]</label>
+                        <input type="password" name="Input.OldPassword" class="form-control" required />
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">@Localizer["NewPassword"]</label>
+                        <input type="password" name="Input.NewPassword" class="form-control" required />
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">@Localizer["ConfirmNewPassword"]</label>
+                        <input type="password" name="Input.ConfirmPassword" class="form-control" required />
+                    </div>
+                    <button type="submit" class="btn btn-primary">@Localizer["ChangePassword"]</button>
+                </form>
+            </div>
+
+            
+            <div class="settings-card">
+                <h2 class="settings-section-title">@Localizer["TwoFactorAuthentication"]</h2>
+                <p class="settings-subtitle">@Localizer["EnableOrDisable2FA"]</p>
+                <div class="d-flex gap-2 flex-wrap">
+                    <a asp-page="./TwoFactorAuthentication" class="btn btn-primary">@Localizer["Manage2FA"]</a>
+                    <a asp-page="./EnableAuthenticator" class="btn btn-outline-primary">@Localizer["SetupAuthenticator"]</a>
+                </div>
+            </div>
+
+            
+            <div class="settings-card">
+                <h2 class="settings-section-title">@Localizer["PersonalData"]</h2>
+                <p class="settings-subtitle">@Localizer["DownloadOrDeletePersonalData"]</p>
+                <div class="alert alert-warning">
+                    <strong>@Localizer["Warning"]:</strong> @Localizer["DeletingDataWillPermanentlyRemoveAccount"]
+                </div>
+                <div class="d-flex gap-2 flex-wrap">
+                    <form asp-page="./DownloadPersonalData" method="post" class="d-inline">
+                        @Html.AntiForgeryToken()
+                        <button type="submit" class="btn btn-primary">
+                            <i class="bi bi-download me-2"></i>@Localizer["DownloadMyData"]
+                        </button>
+                    </form>
+                    <a asp-page="./DeletePersonalData" class="btn btn-danger">
+                        <i class="bi bi-trash me-2"></i>@Localizer["DeleteMyAccount"]
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<partial name="_StatusMessage" for="StatusMessage" />
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const userNameInput = document.getElementById('userNameInput');
+            const displayNameInput = document.getElementById('displayNameInput');
+            
+            if (userNameInput && displayNameInput) {
+                userNameInput.addEventListener('input', function() {
+                    displayNameInput.value = this.value;
+                });
+                
+                displayNameInput.addEventListener('input', function() {
+                    userNameInput.value = this.value;
+                });
+            }
+        });
+        
+        const themeToggle = document.getElementById('themeToggleSettings');
+        if (themeToggle) {
+            themeToggle.addEventListener('click', function() {
+                document.body.classList.toggle('dark');
+                const isDark = document.body.classList.contains('dark');
+                localStorage.setItem('theme', isDark ? 'dark' : 'light');
+                const icon = document.getElementById('themeIconSettings');
+                if (icon) {
+                    icon.className = isDark ? 'bi bi-sun-fill' : 'bi bi-moon-fill';
+                }
+            });
+            
+            const savedTheme = localStorage.getItem('theme') || 'light';
+            if (savedTheme === 'dark') {
+                document.body.classList.add('dark');
+                const icon = document.getElementById('themeIconSettings');
+                if (icon) icon.className = 'bi bi-sun-fill';
+            }
+        }
+
+        function previewPhoto(input) {
+            if (input.files && input.files[0]) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    const profileAvatar = document.getElementById('profileAvatar');
+                    const profileAvatarPlaceholder = document.getElementById('profileAvatarPlaceholder');
+                    
+                    if (profileAvatar) {
+                        profileAvatar.src = e.target.result;
+                        profileAvatar.style.display = 'block';
+                    } else if (profileAvatarPlaceholder) {
+                        profileAvatarPlaceholder.innerHTML = '<img src="' + e.target.result + '" alt="Profile" class="profile-avatar" id="profileAvatar" style="display: block;" />';
+                    }
+                };
+                reader.readAsDataURL(input.files[0]);
+                
+                const form = input.closest('form');
+                if (form) {
+                    form.submit();
+                }
+            }
+        }
+    </script>
+}
