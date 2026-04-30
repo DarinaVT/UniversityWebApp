@@ -1,0 +1,23 @@
+﻿@using UniWebApp.ViewModels.University
+@model List<ReviewViewModel>
+
+@foreach (var r in Model)
+{
+    <div class="border p-2 mb-2">
+        <div class="d-flex align-items-center gap-2 mb-2">
+            @if (!string.IsNullOrEmpty(r.ProfilePictureUrl))
+            {
+                <img src="@r.ProfilePictureUrl" alt="@r.UserName" class="rounded-circle" style="width: 40px; height: 40px; object-fit: cover;" />
+            }
+            else
+            {
+                <i class="bi bi-person-circle" style="font-size: 40px; color: var(--text-color);"></i>
+            }
+            <div>
+                <strong>@r.UserName</strong>
+                <div>⭐ @r.Stars / 5</div>
+            </div>
+        </div>
+        <p class="mb-0">@r.Comment</p>
+    </div>
+}

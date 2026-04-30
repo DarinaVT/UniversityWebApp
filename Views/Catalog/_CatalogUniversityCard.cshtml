@@ -1,0 +1,27 @@
+﻿@model UniWebApp.ViewModels.Catalog.CatalogUniversityViewModel
+
+<div class="modern-university-card">
+    <div class="card-image-container">
+        <img src="@(Model.ImageUrl ?? "/images/university-placeholder.jpg")"
+             class="card-image"
+             alt="@Model.Name"
+             onerror="this.src='/images/university-placeholder.jpg'" />
+    </div>
+    
+    <div class="card-content">
+        <h3 class="card-headline">@Model.Name</h3>
+        
+        <div class="card-body-text">
+            <p class="card-location">@Model.City, @Model.Country</p>
+            <p class="card-rating">⭐ @Model.Rating.ToString("0.0") | @Localizer["GPA"] @Model.AverageGpa.ToString("0.00")</p>
+            <p class="card-description">@Localizer["ExploreProgramsAndFacilities"]</p>
+        </div>
+        
+        <a asp-controller="University"
+           asp-action="Details"
+           asp-route-slug="@(string.IsNullOrEmpty(Model.Slug) ? Model.Id.ToString() : Model.Slug)"
+           class="card-button">
+            @Localizer["ViewDetails"]
+        </a>
+    </div>
+</div>

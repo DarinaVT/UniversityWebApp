@@ -1,0 +1,59 @@
+﻿@using UniWebApp.ViewModels.Catalog
+@using UniWebApp.ViewModels.Home
+
+@if (Model is CatalogUniversityViewModel catalogModel)
+{
+    <div class="modern-university-card">
+        <div class="card-image-container">
+            <img src="@(catalogModel.ImageUrl ?? "/images/university-placeholder.jpg")"
+                 class="card-image"
+                 alt="@catalogModel.Name"
+                 onerror="this.src='/images/university-placeholder.jpg'" />
+        </div>
+        
+        <div class="card-content">
+            <h3 class="card-headline">@catalogModel.Name</h3>
+            
+            <div class="card-body-text">
+                <p class="card-location">@catalogModel.City, @catalogModel.Country</p>
+                <p class="card-rating">⭐ @catalogModel.Rating.ToString("0.0") | @Localizer["GPA"] @catalogModel.AverageGpa.ToString("0.00")</p>
+                <p class="card-description">@Localizer["ExploreProgramsAndFacilities"]</p>
+            </div>
+            
+            <a asp-controller="University"
+               asp-action="Details"
+               asp-route-slug="@(string.IsNullOrEmpty(catalogModel.Slug) ? catalogModel.Id.ToString() : catalogModel.Slug)"
+               class="card-button">
+                @Localizer["ViewDetails"]
+            </a>
+        </div>
+    </div>
+}
+else if (Model is HomeUniversityViewModel homeModel)
+{
+    <div class="modern-university-card">
+        <div class="card-image-container">
+            <img src="@(homeModel.ImageUrl ?? "/images/university-placeholder.jpg")"
+                 class="card-image"
+                 alt="@homeModel.Name"
+                 onerror="this.src='/images/university-placeholder.jpg'" />
+        </div>
+        
+        <div class="card-content">
+            <h3 class="card-headline">@homeModel.Name</h3>
+            
+            <div class="card-body-text">
+                <p class="card-location">@homeModel.City, @homeModel.Country</p>
+                <p class="card-rating">⭐ @homeModel.Rating.ToString("0.0") | @Localizer["GPA"] @homeModel.AverageGpa.ToString("0.00")</p>
+                <p class="card-description">@Localizer["ExploreProgramsAndFacilities"]</p>
+            </div>
+            
+            <a asp-controller="University"
+               asp-action="Details"
+               asp-route-slug="@(string.IsNullOrEmpty(homeModel.Slug) ? homeModel.Id.ToString() : homeModel.Slug)"
+               class="card-button">
+                @Localizer["Details"]
+            </a>
+        </div>
+    </div>
+}

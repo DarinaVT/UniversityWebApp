@@ -1,0 +1,730 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Resources, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Resources, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <metadata name="System.Resources.ResXFileCodeGenerator" type="System.CodeDom.Compiler.GeneratedCodeAttribute">
+    <value>PublicResXFileCodeGenerator</value>
+  </metadata>
+  <data name="Home" xml:space="preserve">
+    <value>Home</value>
+  </data>
+  <data name="Catalog" xml:space="preserve">
+    <value>Catalog</value>
+  </data>
+  <data name="Universities" xml:space="preserve">
+    <value>Universities</value>
+  </data>
+  <data name="Favorites" xml:space="preserve">
+    <value>Favorites</value>
+  </data>
+  <data name="Register" xml:space="preserve">
+    <value>Register</value>
+  </data>
+  <data name="Login" xml:space="preserve">
+    <value>Login</value>
+  </data>
+  <data name="Logout" xml:space="preserve">
+    <value>Logout</value>
+  </data>
+  <data name="Profile" xml:space="preserve">
+    <value>Profile</value>
+  </data>
+  <data name="Settings" xml:space="preserve">
+    <value>Settings</value>
+  </data>
+  <data name="Dashboard" xml:space="preserve">
+    <value>Dashboard</value>
+  </data>
+  <data name="FindYourPerfectUniversity" xml:space="preserve">
+    <value>Find Your Perfect University</value>
+  </data>
+  <data name="SearchUniversityCountryCity" xml:space="preserve">
+    <value>Search university, country, or city...</value>
+  </data>
+  <data name="FeaturedUniversities" xml:space="preserve">
+    <value>Featured Universities</value>
+  </data>
+  <data name="ViewDetails" xml:space="preserve">
+    <value>View Details</value>
+  </data>
+  <data name="Details" xml:space="preserve">
+    <value>Details</value>
+  </data>
+  <data name="Filters" xml:space="preserve">
+    <value>Filters</value>
+  </data>
+  <data name="Country" xml:space="preserve">
+    <value>Country</value>
+  </data>
+  <data name="City" xml:space="preserve">
+    <value>City</value>
+  </data>
+  <data name="SortBy" xml:space="preserve">
+    <value>Sort By</value>
+  </data>
+  <data name="RatingHighToLow" xml:space="preserve">
+    <value>Rating (High to Low)</value>
+  </data>
+  <data name="RatingLowToHigh" xml:space="preserve">
+    <value>Rating (Low to High)</value>
+  </data>
+  <data name="GPAHighToLow" xml:space="preserve">
+    <value>GPA (High to Low)</value>
+  </data>
+  <data name="GPALowToHigh" xml:space="preserve">
+    <value>GPA (Low to High)</value>
+  </data>
+  <data name="NameAZ" xml:space="preserve">
+    <value>Name (A-Z)</value>
+  </data>
+  <data name="NameZA" xml:space="preserve">
+    <value>Name (Z-A)</value>
+  </data>
+  <data name="ClearFilters" xml:space="preserve">
+    <value>Clear Filters</value>
+  </data>
+  <data name="SearchCountry" xml:space="preserve">
+    <value>Search country...</value>
+  </data>
+  <data name="SearchCity" xml:space="preserve">
+    <value>Search city...</value>
+  </data>
+  <data name="ShowingXOfYUniversities" xml:space="preserve">
+    <value>Showing {0} - {1} of {2} universities</value>
+  </data>
+  <data name="NoUniversitiesFound" xml:space="preserve">
+    <value>No universities found matching your criteria.</value>
+  </data>
+  <data name="AddReview" xml:space="preserve">
+    <value>Add Review</value>
+  </data>
+  <data name="RemoveFromFavourites" xml:space="preserve">
+    <value>Remove from favourites</value>
+  </data>
+  <data name="AddToFavourites" xml:space="preserve">
+    <value>Add to favourites</value>
+  </data>
+  <data name="Rating" xml:space="preserve">
+    <value>Rating</value>
+  </data>
+  <data name="AverageGPA" xml:space="preserve">
+    <value>Average GPA</value>
+  </data>
+  <data name="FacultiesSpecialties" xml:space="preserve">
+    <value>Faculties &amp; Specialties</value>
+  </data>
+  <data name="Reviews" xml:space="preserve">
+    <value>Reviews</value>
+  </data>
+  <data name="GPA" xml:space="preserve">
+    <value>GPA</value>
+  </data>
+  <data name="PleaseLogInToAddReview" xml:space="preserve">
+    <value>Please &lt;a href=&quot;/Identity/Account/Login&quot;&gt;log in&lt;/a&gt; to add a review.</value>
+  </data>
+  <data name="LogIn" xml:space="preserve">
+    <value>log in</value>
+  </data>
+  <data name="CountriesWithMostUniversities" xml:space="preserve">
+    <value>Countries with Most Universities</value>
+  </data>
+  <data name="ExploreUniversitiesByCountry" xml:space="preserve">
+    <value>Explore Universities by Country</value>
+  </data>
+  <data name="UseLocalAccount" xml:space="preserve">
+    <value>Use a local account to log in.</value>
+  </data>
+  <data name="CreateNewAccount" xml:space="preserve">
+    <value>Create a new account.</value>
+  </data>
+  <data name="EmailLabel" xml:space="preserve">
+    <value>Email</value>
+  </data>
+  <data name="PasswordLabel" xml:space="preserve">
+    <value>Password</value>
+  </data>
+  <data name="ConfirmPasswordLabel" xml:space="preserve">
+    <value>Confirm Password</value>
+  </data>
+  <data name="RememberMe" xml:space="preserve">
+    <value>Remember me?</value>
+  </data>
+  <data name="ForgotPassword" xml:space="preserve">
+    <value>Forgot your password?</value>
+  </data>
+  <data name="RegisterAsNewUser" xml:space="preserve">
+    <value>Register as a new user</value>
+  </data>
+  <data name="ResendEmailConfirmation" xml:space="preserve">
+    <value>Resend email confirmation</value>
+  </data>
+  <data name="UseAnotherService" xml:space="preserve">
+    <value>Use another service to log in.</value>
+  </data>
+  <data name="ManageAccount" xml:space="preserve">
+    <value>Manage your account</value>
+  </data>
+  <data name="Hello" xml:space="preserve">
+    <value>Hello</value>
+  </data>
+  <data name="InvalidLoginAttempt" xml:space="preserve">
+    <value>Invalid login attempt.</value>
+  </data>
+  <data name="ForgotPasswordTitle" xml:space="preserve">
+    <value>Forgot your password?</value>
+  </data>
+  <data name="EnterYourEmail" xml:space="preserve">
+    <value>Enter your email.</value>
+  </data>
+  <data name="ResetPassword" xml:space="preserve">
+    <value>Reset Password</value>
+  </data>
+  <data name="ResetPasswordTitle" xml:space="preserve">
+    <value>Reset password</value>
+  </data>
+  <data name="ResetYourPassword" xml:space="preserve">
+    <value>Reset your password.</value>
+  </data>
+  <data name="Reset" xml:space="preserve">
+    <value>Reset</value>
+  </data>
+  <data name="Add" xml:space="preserve">
+    <value>Add</value>
+  </data>
+  <data name="Cancel" xml:space="preserve">
+    <value>Cancel</value>
+  </data>
+  <data name="Save" xml:space="preserve">
+    <value>Save</value>
+  </data>
+  <data name="Username" xml:space="preserve">
+    <value>Username</value>
+  </data>
+  <data name="PhoneNumber" xml:space="preserve">
+    <value>Phone Number</value>
+  </data>
+  <data name="Password" xml:space="preserve">
+    <value>Password</value>
+  </data>
+  <data name="ConfirmPassword" xml:space="preserve">
+    <value>Confirm password</value>
+  </data>
+  <data name="PasswordLengthError" xml:space="preserve">
+    <value>The {0} must be at least {2} and at max {1} characters long.</value>
+  </data>
+  <data name="PasswordMismatchError" xml:space="preserve">
+    <value>The password and confirmation password do not match.</value>
+  </data>
+  <data name="PleaseChooseUsername" xml:space="preserve">
+    <value>Please choose your username.</value>
+  </data>
+  <data name="PleaseEnterPhoneNumber" xml:space="preserve">
+    <value>Please enter your phone number.</value>
+  </data>
+  <data name="PleaseEnterPassword" xml:space="preserve">
+    <value>Please enter your password.</value>
+  </data>
+  <data name="PleaseConfirmPassword" xml:space="preserve">
+    <value>Please confirm your password.</value>
+  </data>
+  <data name="ChangePassword" xml:space="preserve">
+    <value>Change password</value>
+  </data>
+  <data name="OldPassword" xml:space="preserve">
+    <value>Old Password</value>
+  </data>
+  <data name="NewPassword" xml:space="preserve">
+    <value>New Password</value>
+  </data>
+  <data name="UpdatePassword" xml:space="preserve">
+    <value>Update password</value>
+  </data>
+  <data name="PleaseEnterOldPassword" xml:space="preserve">
+    <value>Please enter your old password.</value>
+  </data>
+  <data name="PleaseEnterNewPassword" xml:space="preserve">
+    <value>Please enter your new password.</value>
+  </data>
+  <data name="PleaseConfirmNewPassword" xml:space="preserve">
+    <value>Please confirm your new password.</value>
+  </data>
+  <data name="ManageEmail" xml:space="preserve">
+    <value>Manage Email</value>
+  </data>
+  <data name="ChangeEmail" xml:space="preserve">
+    <value>Change email</value>
+  </data>
+  <data name="NewEmail" xml:space="preserve">
+    <value>New Email</value>
+  </data>
+  <data name="PleaseEnterEmail" xml:space="preserve">
+    <value>Please enter your email.</value>
+  </data>
+  <data name="PleaseEnterNewEmail" xml:space="preserve">
+    <value>Please enter new email.</value>
+  </data>
+  <data name="SendVerificationEmail" xml:space="preserve">
+    <value>Send verification email</value>
+  </data>
+  <data name="ExternalLogins" xml:space="preserve">
+    <value>External logins</value>
+  </data>
+  <data name="TwoFactorAuthentication" xml:space="preserve">
+    <value>Two-factor authentication</value>
+  </data>
+  <data name="PersonalData" xml:space="preserve">
+    <value>Personal data</value>
+  </data>
+  <data name="Required" xml:space="preserve">
+    <value>The {0} field is required.</value>
+  </data>
+  <data name="EmailAddress" xml:space="preserve">
+    <value>The {0} field is not a valid email address.</value>
+  </data>
+  <data name="ExploreProgramsAndFacilities" xml:space="preserve">
+    <value>Explore programs and facilities. Discover your future here.</value>
+  </data>
+  <data name="WhatDoYouWantToLearn" xml:space="preserve">
+    <value>What do you want to learn?</value>
+  </data>
+  <data name="Search" xml:space="preserve">
+    <value>Search</value>
+  </data>
+  <data name="Name" xml:space="preserve">
+    <value>Name</value>
+  </data>
+  <data name="Users" xml:space="preserve">
+    <value>Users</value>
+  </data>
+  <data name="Overview" xml:space="preserve">
+    <value>Overview</value>
+  </data>
+  <data name="UniversityInformation" xml:space="preserve">
+    <value>University Information</value>
+  </data>
+  <data name="TotalReviews" xml:space="preserve">
+    <value>Total Reviews</value>
+  </data>
+  <data name="Location" xml:space="preserve">
+    <value>Location</value>
+  </data>
+  <data name="AllMajors" xml:space="preserve">
+    <value>All Majors</value>
+  </data>
+  <data name="DiscoverMajorsDescription" xml:space="preserve">
+    <value>Discover the majors and programs offered by this university and the types of degrees awarded.</value>
+  </data>
+  <data name="Bachelors" xml:space="preserve">
+    <value>Bachelors</value>
+  </data>
+  <data name="Graduates" xml:space="preserve">
+    <value>Graduates</value>
+  </data>
+  <data name="NoOnline" xml:space="preserve">
+    <value>No Online</value>
+  </data>
+  <data name="Edit" xml:space="preserve">
+    <value>Edit</value>
+  </data>
+  <data name="Share" xml:space="preserve">
+    <value>Share</value>
+  </data>
+  <data name="UniversityComparison" xml:space="preserve">
+    <value>University Comparison</value>
+  </data>
+  <data name="TotalUniversities" xml:space="preserve">
+    <value>Total Universities</value>
+  </data>
+  <data name="TotalUsers" xml:space="preserve">
+    <value>Total Users</value>
+  </data>
+  <data name="PendingReviews" xml:space="preserve">
+    <value>Pending Reviews</value>
+  </data>
+  <data name="AllUniversities" xml:space="preserve">
+    <value>All universities</value>
+  </data>
+  <data name="RegisteredUsers" xml:space="preserve">
+    <value>Registered users</value>
+  </data>
+  <data name="AwaitingApproval" xml:space="preserve">
+    <value>Awaiting approval</value>
+  </data>
+  <data name="CountriesCovered" xml:space="preserve">
+    <value>Countries covered</value>
+  </data>
+  <data name="ViewsToday" xml:space="preserve">
+    <value>Views Today</value>
+  </data>
+  <data name="ViewsThisWeek" xml:space="preserve">
+    <value>Views This Week</value>
+  </data>
+  <data name="ViewsThisMonth" xml:space="preserve">
+    <value>Views This Month</value>
+  </data>
+  <data name="UniversitiesMap" xml:space="preserve">
+    <value>Universities Map</value>
+  </data>
+  <data name="ActivityBreakdown" xml:space="preserve">
+    <value>Activity Breakdown</value>
+  </data>
+  <data name="Today" xml:space="preserve">
+    <value>Today</value>
+  </data>
+  <data name="ThisWeek" xml:space="preserve">
+    <value>This Week</value>
+  </data>
+  <data name="ThisMonth" xml:space="preserve">
+    <value>This Month</value>
+  </data>
+  <data name="Total" xml:space="preserve">
+    <value>Total</value>
+  </data>
+  <data name="Search" xml:space="preserve">
+    <value>Search...</value>
+  </data>
+  <data name="Actions" xml:space="preserve">
+    <value>Actions</value>
+  </data>
+  <data name="Delete" xml:space="preserve">
+    <value>Delete</value>
+  </data>
+  <data name="AreYouSureDelete" xml:space="preserve">
+    <value>Are you sure you want to delete this university?</value>
+  </data>
+  <data name="Previous" xml:space="preserve">
+    <value>Previous</value>
+  </data>
+  <data name="Next" xml:space="preserve">
+    <value>Next</value>
+  </data>
+  <data name="ShowingXToYOfZ" xml:space="preserve">
+    <value>Showing {0} to {1} of {2} universities</value>
+  </data>
+  <data name="NoUniversitiesFoundMatching" xml:space="preserve">
+    <value>No universities found matching your search.</value>
+  </data>
+  <data name="NoUniversitiesFound" xml:space="preserve">
+    <value>No universities found.</value>
+  </data>
+  <data name="ExitToSite" xml:space="preserve">
+    <value>Exit to Site</value>
+  </data>
+  <data name="Registered" xml:space="preserve">
+    <value>Registered</value>
+  </data>
+  <data name="View" xml:space="preserve">
+    <value>View</value>
+  </data>
+  <data name="Approve" xml:space="preserve">
+    <value>Approve</value>
+  </data>
+  <data name="Reject" xml:space="preserve">
+    <value>Reject</value>
+  </data>
+  <data name="Comment" xml:space="preserve">
+    <value>Comment</value>
+  </data>
+  <data name="AreYouSureDeleteUser" xml:space="preserve">
+    <value>Are you sure you want to delete user: {0}? This action cannot be undone.</value>
+  </data>
+  <data name="ErrorDeletingUser" xml:space="preserve">
+    <value>Error deleting user</value>
+  </data>
+  <data name="UserDetails" xml:space="preserve">
+    <value>User Details</value>
+  </data>
+  <data name="UserId" xml:space="preserve">
+    <value>User ID</value>
+  </data>
+  <data name="ReviewsCount" xml:space="preserve">
+    <value>Reviews Count</value>
+  </data>
+  <data name="FavouritesCount" xml:space="preserve">
+    <value>Favourites Count</value>
+  </data>
+  <data name="BackToUsers" xml:space="preserve">
+    <value>Back to Users</value>
+  </data>
+  <data name="DeleteUser" xml:space="preserve">
+    <value>Delete User</value>
+  </data>
+  <data name="EnterNewPasswordForUser" xml:space="preserve">
+    <value>Enter a new password for this user</value>
+  </data>
+  <data name="NewPasswordMinCharacters" xml:space="preserve">
+    <value>New Password (min 6 characters)</value>
+  </data>
+  <data name="AreYouSureChangePassword" xml:space="preserve">
+    <value>Are you sure you want to change this user's password?</value>
+  </data>
+  <data name="PasswordChangedSuccessfully" xml:space="preserve">
+    <value>Password changed successfully</value>
+  </data>
+  <data name="PasswordMustBeAtLeast6Characters" xml:space="preserve">
+    <value>Password must be at least 6 characters long</value>
+  </data>
+  <data name="ErrorChangingPassword" xml:space="preserve">
+    <value>Error changing password</value>
+  </data>
+  <data name="FailedToChangePassword" xml:space="preserve">
+    <value>Failed to change password</value>
+  </data>
+  <data name="EditUniversity" xml:space="preserve">
+    <value>Edit University</value>
+  </data>
+  <data name="AddUniversity" xml:space="preserve">
+    <value>Add University</value>
+  </data>
+  <data name="ImageURL" xml:space="preserve">
+    <value>Image URL</value>
+  </data>
+  <data name="PersonalDetails" xml:space="preserve">
+    <value>Personal Details</value>
+  </data>
+  <data name="DisplayName" xml:space="preserve">
+    <value>Display Name</value>
+  </data>
+  <data name="CurrentEmail" xml:space="preserve">
+    <value>Current Email</value>
+  </data>
+  <data name="ChangeYourPassword" xml:space="preserve">
+    <value>Change your password</value>
+  </data>
+  <data name="CurrentPassword" xml:space="preserve">
+    <value>Current Password</value>
+  </data>
+  <data name="ConfirmNewPassword" xml:space="preserve">
+    <value>Confirm New Password</value>
+  </data>
+  <data name="SaveChanges" xml:space="preserve">
+    <value>Save Changes</value>
+  </data>
+  <data name="Email" xml:space="preserve">
+    <value>Email</value>
+  </data>
+  <data name="ApprovedReviews" xml:space="preserve">
+    <value>Approved Reviews</value>
+  </data>
+  <data name="Approved" xml:space="preserve">
+    <value>Approved</value>
+  </data>
+  <data name="Pending" xml:space="preserve">
+    <value>Pending</value>
+  </data>
+  <data name="Favourites" xml:space="preserve">
+    <value>Favourites</value>
+  </data>
+  <data name="University" xml:space="preserve">
+    <value>University</value>
+  </data>
+  <data name="Date" xml:space="preserve">
+    <value>Date</value>
+  </data>
+  <data name="Status" xml:space="preserve">
+    <value>Status</value>
+  </data>
+  <data name="CreateAnAccount" xml:space="preserve">
+    <value>Create an account</value>
+  </data>
+  <data name="AlreadyHaveAccount" xml:space="preserve">
+    <value>Already have an account?</value>
+  </data>
+  <data name="EmailAddressDisplay" xml:space="preserve">
+    <value>Email address</value>
+  </data>
+  <data name="Show" xml:space="preserve">
+    <value>Show</value>
+  </data>
+  <data name="Hide" xml:space="preserve">
+    <value>Hide</value>
+  </data>
+  <data name="Use8OrMore" xml:space="preserve">
+    <value>Use 8 or more characters with a mix of letters, numbers &amp; symbols</value>
+  </data>
+  <data name="ByCreatingAccount" xml:space="preserve">
+    <value>By creating an account, you agree to our</value>
+  </data>
+  <data name="TermsOfUse" xml:space="preserve">
+    <value>Terms of use</value>
+  </data>
+  <data name="PrivacyPolicy" xml:space="preserve">
+    <value>Privacy Policy</value>
+  </data>
+  <data name="And" xml:space="preserve">
+    <value>and</value>
+  </data>
+  <data name="NewToUniWebApp" xml:space="preserve">
+    <value>New to UniWebApp?</value>
+  </data>
+  <data name="SignUpForFree" xml:space="preserve">
+    <value>Sign up for free</value>
+  </data>
+  <data name="LogIn" xml:space="preserve">
+    <value>Log in</value>
+  </data>
+  <data name="ForgotPasswordQuestion" xml:space="preserve">
+    <value>Forgot password?</value>
+  </data>
+  <data name="DontHaveAccountYet" xml:space="preserve">
+    <value>Don't have an account yet?</value>
+  </data>
+  <data name="RegisterHere" xml:space="preserve">
+    <value>Register here</value>
+  </data>
+  <data name="Login" xml:space="preserve">
+    <value>Login</value>
+  </data>
+  <data name="Register" xml:space="preserve">
+    <value>Register</value>
+  </data>
+  <data name="Optional" xml:space="preserve">
+    <value>Optional</value>
+  </data>
+  <data name="UploadImageOrUseURL" xml:space="preserve">
+    <value>Upload image or use URL below</value>
+  </data>
+  <data name="OrEnterImageURL" xml:space="preserve">
+    <value>Or enter image URL</value>
+  </data>
+  <data name="Image" xml:space="preserve">
+    <value>Image</value>
+  </data>
+  <data name="EnableOrDisable2FA" xml:space="preserve">
+    <value>Enable or disable 2FA for additional security</value>
+  </data>
+  <data name="Manage2FA" xml:space="preserve">
+    <value>Manage 2FA</value>
+  </data>
+  <data name="SetupAuthenticator" xml:space="preserve">
+    <value>Setup Authenticator</value>
+  </data>
+  <data name="DownloadOrDeletePersonalData" xml:space="preserve">
+    <value>Download or delete your personal data</value>
+  </data>
+  <data name="Warning" xml:space="preserve">
+    <value>Warning</value>
+  </data>
+  <data name="DeletingDataWillPermanentlyRemoveAccount" xml:space="preserve">
+    <value>Deleting your data will permanently remove your account.</value>
+  </data>
+  <data name="DownloadMyData" xml:space="preserve">
+    <value>Download My Data</value>
+  </data>
+  <data name="DeleteMyAccount" xml:space="preserve">
+    <value>Delete My Account</value>
+  </data>
+  <data name="Rating" xml:space="preserve">
+    <value>Rating</value>
+  </data>
+  <data name="AdministratorsCannotSubmitReviews" xml:space="preserve">
+    <value>Administrators cannot submit reviews. Use the admin dashboard to manage reviews.</value>
+  </data>
+  <data name="ProfileUpdated" xml:space="preserve">
+    <value>Your profile has been updated</value>
+  </data>
+  <data name="All" xml:space="preserve">
+    <value>All</value>
+  </data>
+  <data name="Approve" xml:space="preserve">
+    <value>Approve</value>
+  </data>
+  <data name="Reject" xml:space="preserve">
+    <value>Reject</value>
+  </data>
+  <data name="PendingReviews" xml:space="preserve">
+    <value>Pending Reviews</value>
+  </data>
+  <data name="NoPendingReviews" xml:space="preserve">
+    <value>No pending reviews for this university.</value>
+  </data>
+  <data name="User" xml:space="preserve">
+    <value>User</value>
+  </data>
+  <data name="AddReview" xml:space="preserve">
+    <value>Add a review</value>
+  </data>
+  <data name="SelectRating" xml:space="preserve">
+    <value>Select rating</value>
+  </data>
+  <data name="YourOpinion" xml:space="preserve">
+    <value>Your opinion...</value>
+  </data>
+  <data name="SubmitReview" xml:space="preserve">
+    <value>Submit review</value>
+  </data>
+  <data name="PleaseFillAllFields" xml:space="preserve">
+    <value>Please fill in all fields</value>
+  </data>
+  <data name="ReviewSubmitted" xml:space="preserve">
+    <value>Review submitted and pending approval.</value>
+  </data>
+  <data name="ErrorSubmittingReview" xml:space="preserve">
+    <value>Error submitting review. Please try again.</value>
+  </data>
+  <data name="AddToFavourites" xml:space="preserve">
+    <value>Add to favourites</value>
+  </data>
+  <data name="RemoveFromFavourites" xml:space="preserve">
+    <value>Remove from favourites</value>
+  </data>
+  <data name="ConfirmRemoveFavourite" xml:space="preserve">
+    <value>Are you sure you want to remove this university from your favorites?</value>
+  </data>
+</root>

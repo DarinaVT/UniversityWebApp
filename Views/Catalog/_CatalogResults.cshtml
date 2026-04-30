@@ -1,0 +1,12 @@
+﻿@model UniWebApp.ViewModels.Catalog.CatalogIndexViewModel
+
+<div class="row g-3">
+    @foreach (var uni in Model.Universities)
+    {
+        <div class="col-md-3">
+            <partial name="_CatalogUniversityCard" model="uni" />
+        </div>
+    }
+</div>
+
+<partial name="_Pagination" model="Model" />

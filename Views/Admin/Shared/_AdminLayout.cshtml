@@ -1,0 +1,96 @@
+﻿@using Microsoft.AspNetCore.Identity
+@using Models.Entities
+@using Microsoft.Extensions.Localization
+@using UniWebApp.Resources
+@inject SignInManager<ApplicationUser> SignInManager
+@inject UserManager<ApplicationUser> UserManager
+@inject IStringLocalizer<SharedResource> Localizer
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title>@ViewData["Title"] - Admin Dashboard</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    
+    <link rel="icon" type="image/svg+xml" href="~/favicon.svg" />
+    <link rel="alternate icon" href="~/favicon.ico" />
+
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/admin/css/admin.css" />
+    <link rel="stylesheet" href="~/css/dark-mode.css" asp-append-version="true" />
+    
+    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css" />
+    
+    
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    
+    
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body class="admin-body">
+
+    <div class="admin-wrapper">
+
+        
+        <aside class="admin-sidebar">
+            <div class="admin-logo">UniWebApp</div>
+
+            <ul class="admin-menu">
+                <li>
+                    <a asp-controller="AdminDashboard" asp-action="Index" class="@(ViewContext.RouteData.Values["controller"]?.ToString() == "AdminDashboard" ? "active" : "")">
+                        <i class="bi bi-speedometer2"></i>
+                        <span>@Localizer["Dashboard"]</span>
+                    </a>
+                </li>
+                <li>
+                    <a asp-controller="AdminUniversity" asp-action="Index" class="@(ViewContext.RouteData.Values["controller"]?.ToString() == "AdminUniversity" ? "active" : "")">
+                        <i class="bi bi-mortarboard-fill"></i>
+                        <span>@Localizer["Universities"]</span>
+                    </a>
+                </li>
+                <li>
+                    <a asp-controller="AdminReview" asp-action="Index" class="@(ViewContext.RouteData.Values["controller"]?.ToString() == "AdminReview" ? "active" : "")">
+                        <i class="bi bi-chat-square-text"></i>
+                        <span>@Localizer["Reviews"]</span>
+                    </a>
+                </li>
+                <li>
+                    <a asp-controller="AdminUser" asp-action="Index" class="@(ViewContext.RouteData.Values["controller"]?.ToString() == "AdminUser" ? "active" : "")">
+                        <i class="bi bi-people-fill"></i>
+                        <span>@Localizer["Users"]</span>
+                    </a>
+                </li>
+            </ul>
+        </aside>
+
+        
+        <main class="admin-main">
+            <header class="admin-header">
+                <h1>@ViewData["Title"]</h1>
+                <div class="admin-header-actions">
+                    <button id="themeToggle" class="admin-btn admin-btn-primary" type="button" title="Toggle theme">
+                        <i class="bi bi-moon-fill" id="themeIcon"></i>
+                    </button>
+                    <a asp-controller="Home" asp-action="Index" class="admin-btn admin-btn-primary">
+                        <i class="bi bi-house-door me-1"></i>@Localizer["ExitToSite"]
+                    </a>
+                </div>
+            </header>
+
+            <section class="admin-content">
+                @RenderBody()
+            </section>
+        </main>
+
+    </div>
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/theme.js" asp-append-version="true"></script>
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+    @RenderSection("Scripts", required: false)
+</body>
+</html>

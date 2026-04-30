@@ -1,0 +1,410 @@
+﻿@model UniWebApp.ViewModels.University.UniversityDetailsViewModel;
+@using Microsoft.AspNetCore.Identity
+@using Models.Entities
+@inject UserManager<ApplicationUser> UserManager
+
+@{
+    var isAdmin = User.Identity?.IsAuthenticated == true && User.IsInRole("Admin");
+}
+
+
+<div class="university-header-section mb-4">
+    <div class="container-fluid px-0">
+        <div class="row g-0">
+            
+            <div class="col-12">
+                <div class="university-hero-image" style="background-image: url('@Model.ImageUrl'); background-size: cover; background-position: center; height: 300px; position: relative;">
+                    <div class="university-hero-overlay"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    
+    <div class="container">
+        <div class="university-info-card">
+            <div class="row align-items-start">
+                <div class="col-md-8">
+                    <div class="mb-2">
+                        <h1 class="university-name mb-1">@Model.Name</h1>
+                        <p class="university-location mb-0">
+                            <i class="bi bi-geo-alt-fill me-1"></i>@Model.City, @Model.Country
+                        </p>
+                    </div>
+                </div>
+                <div class="col-md-4 text-md-end">
+                    
+                    <div class="ranking-badge mb-3">
+                        <div class="ranking-label">@Localizer["Rating"]</div>
+                        <div class="ranking-value">@Model.Rating.ToString("F1")</div>
+                        <div class="ranking-stars">
+                            @for (int i = 0; i < 5; i++)
+                            {
+                                <i class="bi bi-star-fill @(i < (int)Model.Rating ? "text-warning" : "text-muted")"></i>
+                            }
+                        </div>
+                    </div>
+                    
+                    
+                    <div class="university-actions d-flex gap-2 justify-content-md-end justify-content-start flex-wrap">
+                        @if (isAdmin)
+                        {
+                            <a asp-controller="AdminUniversity" asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-primary btn-sm">
+                                <i class="bi bi-pencil-fill me-1"></i>@Localizer["Edit"]
+                            </a>
+                        }
+                        else
+                        {
+                            <button id="favBtn"
+                                    class="btn @(User.Identity?.IsAuthenticated == true && Model.IsFavourite ? "btn-danger" : "btn-outline-danger") btn-sm"
+                                    data-university-id="@Model.Id"
+                                    data-is-authenticated="@(User.Identity?.IsAuthenticated == true ? "true" : "false")"
+                                    data-add-text="@Localizer["AddToFavourites"]"
+                                    data-remove-text="@Localizer["RemoveFromFavourites"]">
+                                <i class="bi bi-heart@(User.Identity?.IsAuthenticated == true && Model.IsFavourite ? "-fill" : "") me-1"></i>
+                                <span id="favText">
+                                    @if (User.Identity?.IsAuthenticated == true)
+                                    {
+                                        @(Model.IsFavourite ? Localizer["RemoveFromFavourites"] : Localizer["AddToFavourites"])
+                                    }
+                                    else
+                                    {
+                                        @Localizer["AddToFavourites"]
+                                    }
+                                </span>
+                            </button>
+                        }
+                        <button class="btn btn-outline-secondary btn-sm" onclick="shareUniversity()" title="@Localizer["Share"]">
+                            <i class="bi bi-share me-1"></i>@Localizer["Share"]
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    
+    @if (!string.IsNullOrEmpty(Model.Description))
+    {
+        <section class="university-section mb-5">
+            <h2 class="section-title">@Localizer["Overview"]</h2>
+            <div class="section-content">
+                <p>@Model.Description</p>
+            </div>
+        </section>
+    }
+
+    
+    <section class="university-section mb-5">
+        <h2 class="section-title">@Localizer["UniversityInformation"]</h2>
+        <div class="row">
+            <div class="col-md-6 mb-3">
+                <div class="info-card">
+                    <div class="info-label">@Localizer["Rating"]</div>
+                    <div class="info-value">@Model.Rating.ToString("F1") / 5.0</div>
+                    <div class="info-stars">
+                        @for (int i = 0; i < 5; i++)
+                        {
+                            <i class="bi bi-star-fill @(i < (int)Model.Rating ? "text-warning" : "text-muted")"></i>
+                        }
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 mb-3">
+                <div class="info-card">
+                    <div class="info-label">@Localizer["AverageGPA"]</div>
+                    <div class="info-value">@Model.AverageGpa.ToString("F2")</div>
+                </div>
+            </div>
+            <div class="col-md-6 mb-3">
+                <div class="info-card">
+                    <div class="info-label">@Localizer["Location"]</div>
+                    <div class="info-value">@Model.City, @Model.Country</div>
+                </div>
+            </div>
+            <div class="col-md-6 mb-3">
+                <div class="info-card">
+                    <div class="info-label">@Localizer["TotalReviews"]</div>
+                    <div class="info-value">@Model.Reviews.Count</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    
+    @if (Model.Faculties.Any())
+    {
+        <section class="university-section mb-5" id="majors-section">
+            <h2 class="section-title">@Localizer["AllMajors"]</h2>
+            <p class="text-muted mb-4">@Localizer["DiscoverMajorsDescription"]</p>
+            
+            
+            <div class="majors-category-nav mb-4">
+                @{
+                    int tabIndex = 0;
+                }
+                @foreach (var faculty in Model.Faculties)
+                {
+                    var categoryId = $"category-{System.Text.RegularExpressions.Regex.Replace((faculty.OriginalName ?? faculty.Name).ToLower(), @"[^a-z0-9]+", "-")}";
+                    <a href="#@categoryId" class="major-category-tab @(tabIndex == 0 ? "active" : "")" data-category="@categoryId">
+                        @faculty.Name
+                    </a>
+                    tabIndex++;
+                }
+            </div>
+
+            
+            <div class="majors-content">
+                @foreach (var faculty in Model.Faculties)
+                {
+                    var categoryId = $"category-{System.Text.RegularExpressions.Regex.Replace((faculty.OriginalName ?? faculty.Name).ToLower(), @"[^a-z0-9]+", "-")}";
+                    <div id="@categoryId" class="major-category-section">
+                        <h3 class="major-category-title">@faculty.Name</h3>
+                        <div class="majors-list">
+                            @foreach (var specialty in faculty.Specialties)
+                            {
+                                <div class="major-item">
+                                    <div class="major-name">@specialty</div>
+                                    <div class="major-details">
+                                        <span class="major-degree">@Localizer["Bachelors"]</span>
+                                    </div>
+                                </div>
+                            }
+                        </div>
+                    </div>
+                }
+            </div>
+        </section>
+    }
+
+    
+    <section class="university-section mb-5">
+        <h2 class="section-title">@Localizer["Reviews"]</h2>
+        
+        @if (isAdmin)
+        {
+            
+            <div class="mt-4">
+                <h4 class="text-warning">@Localizer["PendingReviews"] (@Model.PendingReviews.Count)</h4>
+                @if (Model.PendingReviews.Any())
+                {
+                    <div class="table-responsive">
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th>@Localizer["User"]</th>
+                                    <th>@Localizer["Rating"]</th>
+                                    <th>@Localizer["Comment"]</th>
+                                    <th>@Localizer["Date"]</th>
+                                    <th>@Localizer["Actions"]</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var review in Model.PendingReviews)
+                                {
+                                    <tr id="pending-review-@review.Id">
+                                        <td>
+                                            <div class="d-flex align-items-center gap-2">
+                                                @if (!string.IsNullOrEmpty(review.ProfilePictureUrl))
+                                                {
+                                                    <img src="@review.ProfilePictureUrl" alt="@review.UserName" class="rounded-circle" style="width: 32px; height: 32px; object-fit: cover;" />
+                                                }
+                                                else
+                                                {
+                                                    <i class="bi bi-person-circle" style="font-size: 32px;"></i>
+                                                }
+                                                <span>@review.UserName</span>
+                                            </div>
+                                        </td>
+                                        <td>@review.Stars ⭐</td>
+                                        <td>@review.Comment</td>
+                                        <td>@review.CreatedAt.ToShortDateString()</td>
+                                        <td>
+                                            <button class="btn btn-success btn-sm approve-review-btn" data-review-id="@review.Id">
+                                                @Localizer["Approve"]
+                                            </button>
+                                            <button class="btn btn-danger btn-sm reject-review-btn" data-review-id="@review.Id">
+                                                @Localizer["Reject"]
+                                            </button>
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                }
+                else
+                {
+                    <p class="text-muted">@Localizer["NoPendingReviews"]</p>
+                }
+            </div>
+        }
+        else if (User.Identity?.IsAuthenticated ?? false)
+        {
+            @await Html.PartialAsync("~/Views/University/_AddReviewForm.cshtml", Model.AddReview)
+        }
+        else
+        {
+            <p class="text-muted mt-3">
+                @Html.Raw(Localizer["PleaseLogInToAddReview"])
+            </p>
+        }
+
+        <div id="reviewsSection" class="mt-4">
+            @await Html.PartialAsync("~/Views/University/_Reviews.cshtml", Model.Reviews)
+        </div>
+    </section>
+
+    
+    @await Html.PartialAsync("~/Views/University/_CompareChart.cshtml")
+</div>
+
+@Html.AntiForgeryToken()
+<input type="hidden" id="universityId" value="@Model.Id" />
+
+@section Scripts {
+    <script src="~/js/university-compare-chart.js" asp-append-version="true"></script>
+    @if (!isAdmin)
+    {
+        <script src="~/js/favourite.js" asp-append-version="true"></script>
+        <script src="~/js/add-review.js" asp-append-version="true"></script>
+    }
+    else
+    {
+        <script>
+            document.addEventListener("DOMContentLoaded", () => {
+                document.querySelectorAll(".approve-review-btn").forEach(btn => {
+                    btn.addEventListener("click", async function() {
+                        const reviewId = this.dataset.reviewId;
+                        try {
+                            const response = await fetch(`/AdminReview/Approve?id=${reviewId}`, {
+                                method: "POST",
+                                headers: {
+                                    "RequestVerificationToken": document.querySelector('input[name="__RequestVerificationToken"]')?.value || ""
+                                }
+                            });
+                            if (response.ok) {
+                                document.getElementById(`pending-review-${reviewId}`).remove();
+                                setTimeout(() => window.location.reload(), 500);
+                            }
+                        } catch (error) {
+                            console.error("Error approving review:", error);
+                            alert("Error approving review");
+                        }
+                    });
+                });
+
+                document.querySelectorAll(".reject-review-btn").forEach(btn => {
+                    btn.addEventListener("click", async function() {
+                        const reviewId = this.dataset.reviewId;
+                        if (!confirm("Are you sure you want to reject this review?")) return;
+                        try {
+                            const response = await fetch(`/AdminReview/Reject?id=${reviewId}`, {
+                                method: "POST",
+                                headers: {
+                                    "RequestVerificationToken": document.querySelector('input[name="__RequestVerificationToken"]')?.value || ""
+                                }
+                            });
+                            if (response.ok) {
+                                document.getElementById(`pending-review-${reviewId}`).remove();
+                                setTimeout(() => window.location.reload(), 500);
+                            }
+                        } catch (error) {
+                            console.error("Error rejecting review:", error);
+                            alert("Error rejecting review");
+                        }
+                    });
+                });
+            });
+        </script>
+    }
+    <script>
+        function shareUniversity() {
+            if (navigator.share) {
+                navigator.share({
+                    title: '@Model.Name',
+                    text: 'Check out @Model.Name in @Model.City, @Model.Country',
+                    url: window.location.href
+                });
+            } else {
+                navigator.clipboard.writeText(window.location.href);
+                alert('Link copied to clipboard!');
+            }
+        }
+
+        document.addEventListener("DOMContentLoaded", () => {
+            const categoryTabs = document.querySelectorAll(".major-category-tab");
+            const categorySections = document.querySelectorAll(".major-category-section");
+
+            if (categoryTabs.length === 0) return;
+
+            function scrollToHash() {
+                if (window.location.hash) {
+                    const hash = window.location.hash.substring(1);
+                    const targetSection = document.getElementById(hash);
+                    
+                    if (targetSection) {
+                        setTimeout(() => {
+                            targetSection.scrollIntoView({ behavior: "smooth", block: "start" });
+                            
+                            categoryTabs.forEach(t => t.classList.remove("active"));
+                            const matchingTab = Array.from(categoryTabs).find(tab => 
+                                tab.getAttribute("href") === `#${hash}`
+                            );
+                            if (matchingTab) {
+                                matchingTab.classList.add("active");
+                            }
+                        }, 100);
+                    }
+                }
+            }
+
+            scrollToHash();
+
+            window.addEventListener("hashchange", scrollToHash);
+
+            categoryTabs.forEach(tab => {
+                tab.addEventListener("click", function(e) {
+                    e.preventDefault();
+                    const targetId = this.getAttribute("href").substring(1);
+                    const targetSection = document.getElementById(targetId);
+                    
+                    if (targetSection) {
+                        window.history.pushState(null, null, `#${targetId}`);
+                        
+                        categoryTabs.forEach(t => t.classList.remove("active"));
+                        this.classList.add("active");
+                        
+                        targetSection.scrollIntoView({ behavior: "smooth", block: "start" });
+                    }
+                });
+            });
+
+            const observerOptions = {
+                root: null,
+                rootMargin: "-100px 0px -50% 0px",
+                threshold: 0
+            };
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const id = entry.target.id;
+                        categoryTabs.forEach(tab => {
+                            if (tab.getAttribute("href") === `#${id}`) {
+                                categoryTabs.forEach(t => t.classList.remove("active"));
+                                tab.classList.add("active");
+                            }
+                        });
+                    }
+                });
+            }, observerOptions);
+
+            categorySections.forEach(section => {
+                observer.observe(section);
+            });
+        });
+    </script>
+}

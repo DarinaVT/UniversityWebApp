@@ -1,0 +1,125 @@
+@model UniWebApp.ViewModels.Catalog.CatalogIndexViewModel
+
+@{
+    ViewData["Title"] = Model.IsFavoritesPage ? Localizer["Favorites"].Value : Localizer["Catalog"].Value;
+    ViewData["IsFavoritesPage"] = Model.IsFavoritesPage;
+}
+
+<div class="row">
+    
+    @if (!Model.IsFavoritesPage)
+    {
+    <div class="col-md-3 col-lg-3">
+        <div class="filter-container">
+            
+            <div class="filter-header">
+                <i class="bi bi-list me-2"></i>
+                <span>@Localizer["Filters"]</span>
+            </div>
+
+            @if (string.IsNullOrWhiteSpace(Model.Search))
+            {
+                
+                <div class="filter-section">
+                    <h6 class="filter-section-title">@Localizer["Country"]</h6>
+                    <div class="filter-divider"></div>
+                    <input type="text"
+                           id="countrySearch"
+                           class="form-control form-control-sm mb-2"
+                           placeholder="@Localizer["SearchCountry"]" />
+                    <div id="countryTags" class="filter-tags" data-all-label="@Localizer["All"]"></div>
+                </div>
+
+                
+                <div class="filter-section" id="cityFilter" style="display: none;">
+                    <h6 class="filter-section-title">@Localizer["City"]</h6>
+                    <div class="filter-divider"></div>
+                    <input type="text"
+                           id="citySearch"
+                           class="form-control form-control-sm mb-2"
+                           placeholder="@Localizer["SearchCity"]" />
+                    <div id="cityTags" class="filter-tags" data-all-label="@Localizer["All"]"></div>
+                </div>
+            }
+
+            
+            <div class="filter-section">
+                <h6 class="filter-section-title">@Localizer["SortBy"]</h6>
+                <div class="filter-divider"></div>
+                <select id="sortSelect" class="form-select form-select-sm filter-sort">
+                    @if (Model.Sort == "name-asc" || string.IsNullOrEmpty(Model.Sort))
+                    {
+                        <option value="name-asc" selected>@Localizer["NameAZ"]</option>
+                    }
+                    else
+                    {
+                        <option value="name-asc">@Localizer["NameAZ"]</option>
+                    }
+                    @if (Model.Sort == "name-desc")
+                    {
+                        <option value="name-desc" selected>@Localizer["NameZA"]</option>
+                    }
+                    else
+                    {
+                        <option value="name-desc">@Localizer["NameZA"]</option>
+                    }
+                    @if (Model.Sort == "rating-asc")
+                    {
+                        <option value="rating-asc" selected>@Localizer["RatingLowToHigh"]</option>
+                    }
+                    else
+                    {
+                        <option value="rating-asc">@Localizer["RatingLowToHigh"]</option>
+                    }
+                    @if (Model.Sort == "rating-desc")
+                    {
+                        <option value="rating-desc" selected>@Localizer["RatingHighToLow"]</option>
+                    }
+                    else
+                    {
+                        <option value="rating-desc">@Localizer["RatingHighToLow"]</option>
+                    }
+                    @if (Model.Sort == "gpa-asc")
+                    {
+                        <option value="gpa-asc" selected>@Localizer["GPALowToHigh"]</option>
+                    }
+                    else
+                    {
+                        <option value="gpa-asc">@Localizer["GPALowToHigh"]</option>
+                    }
+                    @if (Model.Sort == "gpa-desc")
+                    {
+                        <option value="gpa-desc" selected>@Localizer["GPAHighToLow"]</option>
+                    }
+                    else
+                    {
+                        <option value="gpa-desc">@Localizer["GPAHighToLow"]</option>
+                    }
+                </select>
+            </div>
+        </div>
+    </div>
+    }
+
+    
+    <div class="@(Model.IsFavoritesPage ? "col-12" : "col-md-9 col-lg-9")">
+        <div id="catalogResults">
+            <partial name="_Results" model="Model" />
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @if (Model.IsFavoritesPage)
+    {
+        <script>
+            document.body.dataset.confirmRemoveFavourite = @Html.Raw(Json.Serialize(Localizer["ConfirmRemoveFavourite"].Value));
+        </script>
+        <script src="~/js/favorites.js" asp-append-version="true"></script>
+    }
+    else
+    {
+        <script src="~/js/catalogFilters.js" asp-append-version="true"></script>
+    }
+}
+

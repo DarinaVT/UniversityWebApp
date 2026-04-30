@@ -1,0 +1,14 @@
+﻿@model IEnumerable<UniWebApp.ViewModels.University.FacultyViewModel>
+
+@foreach (var faculty in Model)
+{
+    <div class="mb-3">
+        <h5>@faculty.Name</h5>
+        <ul>
+            @foreach (var s in faculty.Specialties)
+            {
+                <li>@s</li>
+            }
+        </ul>
+    </div>
+}

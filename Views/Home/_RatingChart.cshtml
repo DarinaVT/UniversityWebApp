@@ -1,0 +1,21 @@
+﻿@model List<UniWebApp.ViewModels.Home.HomeUniversityViewModel>
+
+@{
+    ViewData["Title"] = "Home";
+}
+
+<partial name="_HeroSection" />
+<partial name="_SearchBar" />
+
+<div class="container mt-5">
+    <h2 class="mb-4">Top Universities</h2>
+
+    <div class="row">
+        @foreach (var uni in Model)
+        {
+            <div class="col-md-3 mb-4">
+                <partial name="_UniversityCard" model="uni" />
+            </div>
+        }
+    </div>
+</div>

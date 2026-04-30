@@ -1,0 +1,263 @@
+@model UniWebApp.ViewModels.Admin.AdminUniversityEditViewModel
+@using UniWebApp.ViewModels.Admin
+@{
+    Layout = "~/Views/Admin/Shared/_AdminLayout.cshtml";
+    ViewData["Title"] = Localizer["AddUniversity"]?.Value ?? "Add University";
+    var countries = ViewBag.Countries as List<CountryCityOptionViewModel> ?? new List<CountryCityOptionViewModel>();
+    var cities = ViewBag.Cities as List<CountryCityOptionViewModel> ?? new List<CountryCityOptionViewModel>();
+}
+
+<h2>@Localizer["AddUniversity"]</h2>
+
+@if (!ViewData.ModelState.IsValid)
+{
+    <div class="alert alert-danger">
+        @foreach (var error in ViewData.ModelState.Values.SelectMany(v => v.Errors))
+        {
+            <p>@error.ErrorMessage</p>
+        }
+    </div>
+}
+
+<form method="post" enctype="multipart/form-data">
+    <input type="hidden" asp-for="Id" />
+
+    <div class="mb-2">
+        <label>@Localizer["Name"] <span class="text-danger">*</span></label>
+        <input asp-for="Name" class="form-control" required />
+        <span asp-validation-for="Name" class="text-danger"></span>
+    </div>
+
+    <div class="mb-2">
+        <label>@Localizer["Country"] <span class="text-danger">*</span></label>
+        <div class="searchable-select-wrapper">
+            <input type="text" class="form-control searchable-select-input" id="countrySearch" placeholder="@(Localizer["Search"]?.Value ?? "Search countries...")" autocomplete="off" />
+            <select asp-for="CountryId" class="form-control searchable-select" id="countrySelect" required style="display: none;">
+                <option value="">@(Localizer["SelectCountry"]?.Value ?? "Select Country")</option>
+                @foreach (var country in countries)
+                {
+                    <option value="@country.Id" data-name="@country.Name" data-translated="@country.TranslatedName">@country.TranslatedName</option>
+                }
+            </select>
+            <div class="searchable-select-dropdown" id="countryDropdown" style="display: none;"></div>
+        </div>
+        <span asp-validation-for="CountryId" class="text-danger"></span>
+    </div>
+
+    <div class="mb-2">
+        <label>@Localizer["City"] <span class="text-danger">*</span></label>
+        <div class="searchable-select-wrapper">
+            <input type="text" class="form-control searchable-select-input" id="citySearch" placeholder="@(Localizer["Search"]?.Value ?? "Search cities...")" autocomplete="off" />
+            <select asp-for="CityId" class="form-control searchable-select" id="citySelect" required style="display: none;">
+                <option value="">@(Localizer["SelectCity"]?.Value ?? "Select City")</option>
+                @foreach (var city in cities)
+                {
+                    <option value="@city.Id" data-name="@city.Name" data-translated="@city.TranslatedName" data-country-id="@city.CountryId">@city.TranslatedName</option>
+                }
+            </select>
+            <div class="searchable-select-dropdown" id="cityDropdown" style="display: none;"></div>
+        </div>
+        <span asp-validation-for="CityId" class="text-danger"></span>
+    </div>
+
+    <div class="mb-2">
+        <label>@Localizer["Rating"]</label>
+        <input asp-for="Rating" class="form-control" type="number" step="0.01" min="0" max="10" />
+        <span asp-validation-for="Rating" class="text-danger"></span>
+    </div>
+
+    <div class="mb-2">
+        <label>@Localizer["AverageGPA"]</label>
+        <input asp-for="AverageGpa" class="form-control" type="number" step="0.01" min="0" max="5" />
+        <span asp-validation-for="AverageGpa" class="text-danger"></span>
+    </div>
+
+    <div class="mb-2">
+        <label>@Localizer["Image"] (@Localizer["Optional"])</label>
+        <input type="file" name="imageFile" accept="image/*" class="form-control" id="imageFile" />
+        <small class="form-text text-muted">@Localizer["UploadImageOrUseURL"]</small>
+    </div>
+
+    <button type="submit" class="btn btn-success">@Localizer["Add"]</button>
+    <a asp-action="Index" class="btn btn-secondary">@Localizer["Cancel"]</a>
+</form>
+
+@section Scripts {
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const countrySelect = document.getElementById('countrySelect');
+            const citySelect = document.getElementById('citySelect');
+            const countrySearch = document.getElementById('countrySearch');
+            const citySearch = document.getElementById('citySearch');
+            
+            const modelCountryId = @Html.Raw(Json.Serialize(Model.CountryId));
+            const modelCityId = @Html.Raw(Json.Serialize(Model.CityId));
+            const modelName = @Html.Raw(Json.Serialize(Model.Name ?? ""));
+            const modelRating = @Html.Raw(Json.Serialize(Model.Rating));
+            const modelAverageGpa = @Html.Raw(Json.Serialize(Model.AverageGpa));
+            
+            const allCities = Array.from(citySelect.options).map(opt => ({
+                value: opt.value,
+                text: opt.textContent,
+                translated: opt.getAttribute('data-translated') || opt.textContent,
+                name: opt.getAttribute('data-name') || '',
+                countryId: opt.getAttribute('data-country-id') || ''
+            }));
+
+            function filterCitiesByCountry(countryId) {
+                citySelect.innerHTML = '<option value="">@(Localizer["SelectCity"]?.Value ?? "Select City")</option>';
+                
+                if (!countryId || countryId === '') {
+                    allCities.forEach(city => {
+                        if (city.value) {
+                            const option = document.createElement('option');
+                            option.value = city.value;
+                            option.textContent = city.translated;
+                            option.setAttribute('data-translated', city.translated);
+                            option.setAttribute('data-name', city.name);
+                            option.setAttribute('data-country-id', city.countryId);
+                            citySelect.appendChild(option);
+                        }
+                    });
+                } else {
+                    allCities.forEach(city => {
+                        if (city.value && city.countryId === countryId.toString()) {
+                            const option = document.createElement('option');
+                            option.value = city.value;
+                            option.textContent = city.translated;
+                            option.setAttribute('data-translated', city.translated);
+                            option.setAttribute('data-name', city.name);
+                            option.setAttribute('data-country-id', city.countryId);
+                            citySelect.appendChild(option);
+                        }
+                    });
+                }
+            }
+
+            countrySelect.addEventListener('change', function() {
+                const selectedCountryId = this.value;
+                filterCitiesByCountry(selectedCountryId);
+                citySearch.value = '';
+                setTimeout(() => {
+                    initSearchableSelect('citySearch', 'citySelect', 'cityDropdown');
+                }, 50);
+            });
+
+            initSearchableSelect('countrySearch', 'countrySelect', 'countryDropdown');
+            initSearchableSelect('citySearch', 'citySelect', 'cityDropdown');
+            
+            if (modelCountryId && modelCountryId > 0) {
+                countrySelect.value = modelCountryId;
+                const selectedCountryOption = countrySelect.options[countrySelect.selectedIndex];
+                if (selectedCountryOption) {
+                    countrySearch.value = selectedCountryOption.getAttribute('data-translated') || selectedCountryOption.textContent;
+                }
+                
+                filterCitiesByCountry(modelCountryId.toString());
+                
+                setTimeout(() => {
+                    if (modelCityId && modelCityId > 0) {
+                        citySelect.value = modelCityId;
+                        const selectedCityOption = citySelect.options[citySelect.selectedIndex];
+                        if (selectedCityOption) {
+                            citySearch.value = selectedCityOption.getAttribute('data-translated') || selectedCityOption.textContent;
+                        }
+                    }
+                    initSearchableSelect('citySearch', 'citySelect', 'cityDropdown');
+                }, 150);
+            } else if (modelCityId && modelCityId > 0) {
+                const cityOption = Array.from(citySelect.options).find(opt => opt.value == modelCityId);
+                if (cityOption) {
+                    const cityCountryId = cityOption.getAttribute('data-country-id');
+                    if (cityCountryId) {
+                        countrySelect.value = cityCountryId;
+                        const selectedCountryOption = countrySelect.options[countrySelect.selectedIndex];
+                        if (selectedCountryOption) {
+                            countrySearch.value = selectedCountryOption.getAttribute('data-translated') || selectedCountryOption.textContent;
+                        }
+                        filterCitiesByCountry(cityCountryId);
+                        setTimeout(() => {
+                            citySelect.value = modelCityId;
+                            const selectedCityOption = citySelect.options[citySelect.selectedIndex];
+                            if (selectedCityOption) {
+                                citySearch.value = selectedCityOption.getAttribute('data-translated') || selectedCityOption.textContent;
+                            }
+                            initSearchableSelect('citySearch', 'citySelect', 'cityDropdown');
+                        }, 150);
+                    }
+                }
+            }
+        });
+
+        function initSearchableSelect(inputId, selectId, dropdownId) {
+            const input = document.getElementById(inputId);
+            const select = document.getElementById(selectId);
+            const dropdown = document.getElementById(dropdownId);
+            const wrapper = input.closest('.searchable-select-wrapper');
+
+            if (!input || !select || !dropdown) return;
+
+            function filterOptions() {
+                const searchTerm = input.value.toLowerCase();
+                const options = Array.from(select.options);
+                dropdown.innerHTML = '';
+
+                const filtered = options.filter(opt => {
+                    if (opt.value === '') return true;
+                    const translated = opt.getAttribute('data-translated') || opt.textContent;
+                    const name = opt.getAttribute('data-name') || '';
+                    return translated.toLowerCase().includes(searchTerm) || name.toLowerCase().includes(searchTerm);
+                });
+
+                if (filtered.length === 0) {
+                    dropdown.style.display = 'none';
+                    return;
+                }
+
+                filtered.forEach(opt => {
+                    const div = document.createElement('div');
+                    div.className = 'searchable-select-option';
+                    div.textContent = opt.getAttribute('data-translated') || opt.textContent;
+                    if (opt.value === select.value) {
+                        div.classList.add('selected');
+                    }
+                    div.onclick = () => {
+                        select.value = opt.value;
+                        input.value = opt.getAttribute('data-translated') || opt.textContent;
+                        dropdown.style.display = 'none';
+                        input.blur();
+                        
+                        if (selectId === 'countrySelect') {
+                            select.dispatchEvent(new Event('change'));
+                        }
+                    };
+                    dropdown.appendChild(div);
+                });
+
+                if (filtered.length > 1) {
+                    dropdown.style.display = 'block';
+                    dropdown.style.maxHeight = '200px';
+                    dropdown.style.overflowY = 'auto';
+                } else {
+                    dropdown.style.display = 'none';
+                }
+            }
+
+            input.addEventListener('input', filterOptions);
+            input.addEventListener('focus', filterOptions);
+
+            input.addEventListener('blur', function() {
+                setTimeout(() => {
+                    dropdown.style.display = 'none';
+                }, 200);
+            });
+
+            document.addEventListener('click', function(e) {
+                if (!wrapper.contains(e.target)) {
+                    dropdown.style.display = 'none';
+                }
+            });
+        }
+    </script>
+}
+

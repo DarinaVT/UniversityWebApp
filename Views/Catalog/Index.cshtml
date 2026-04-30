@@ -1,0 +1,15 @@
+﻿@model UniWebApp.ViewModels.Catalog.CatalogIndexViewModel
+
+<div class="row">
+    <div class="col-md-3">
+        <partial name="_CatalogFilters" />
+    </div>
+
+    <div class="col-md-9" id="catalogResults">
+        <partial name="_CatalogResults" model="Model" />
+    </div>
+</div>
+
+@section Scripts {
+    <script src="~/js/catalog-filters.js"></script>
+}

@@ -1,0 +1,32 @@
+﻿
+<section class="hero-section">
+    <div class="hero-background"></div>
+    <div class="container">
+        <div class="hero-content-wrapper">
+            <div class="hero-text text-center mb-5">
+                <h1 class="hero-title">@Localizer["FindYourPerfectUniversity"]</h1>
+                <p class="hero-subtitle">@Localizer["ExploreProgramsAndFacilities"]</p>
+            </div>
+            
+            
+            <div class="hero-search-card">
+                <form method="get" asp-controller="Universities" asp-action="Index" class="search-form">
+                    <div class="search-input-wrapper">
+                        <i class="bi bi-search search-icon"></i>
+                        <input type="text"
+                               id="heroSearchInput"
+                               name="search"
+                               class="search-input"
+                               placeholder="@Localizer["SearchUniversityCountryCity"]"
+                               autocomplete="off" />
+                        <button type="submit" class="search-button">
+                            @Localizer["Search"]
+                        </button>
+                    </div>
+                    
+                    <div id="autocompleteDropdown" class="autocomplete-dropdown"></div>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>

@@ -1,0 +1,43 @@
+@model IEnumerable<UniWebApp.ViewModels.University.ReviewViewModel>
+
+<div id="reviewsContainer">
+    <h5 class="mt-4">Reviews</h5>
+
+    @if (!Model.Any())
+    {
+        <p class="text-muted">No reviews yet.</p>
+    }
+    else
+    {
+        foreach (var review in Model)
+        {
+            <div class="card mb-2" id="review-@review.Id">
+                <div class="card-body">
+                    <div class="d-flex align-items-center gap-2 mb-2">
+                        @if (!string.IsNullOrEmpty(review.ProfilePictureUrl))
+                        {
+                            <img src="@review.ProfilePictureUrl" alt="@review.UserName" class="rounded-circle" style="width: 40px; height: 40px; object-fit: cover;" />
+                        }
+                        else
+                        {
+                            <i class="bi bi-person-circle" style="font-size: 40px; color: var(--text-color);"></i>
+                        }
+                        <div class="flex-grow-1">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <strong>@review.UserName</strong>
+                                <span>⭐ @review.Stars</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <p class="mt-2 mb-1">@review.Comment</p>
+
+                    <small class="text-muted">
+                        @review.CreatedAt.ToString("dd MMM yyyy")
+                    </small>
+                </div>
+            </div>
+        }
+    }
+</div>
+

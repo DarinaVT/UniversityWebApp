@@ -1,0 +1,23 @@
+@model UniWebApp.ViewModels.Catalog.CatalogUniversityViewModel
+
+<div class="favorites-card-container position-relative">
+    
+    @if (ViewData["IsFavoritesPage"] as bool? == true)
+    {
+        <button type="button" 
+                class="remove-favorite-btn" 
+                data-university-id="@Model.Id"
+                title="@Localizer["RemoveFromFavourites"]">
+            <i class="bi bi-x"></i>
+        </button>
+    }
+    
+    <a asp-controller="University" asp-action="Details" asp-route-slug="@(string.IsNullOrEmpty(Model.Slug) ? Model.Id.ToString() : Model.Slug)" class="favorites-card">
+        <div class="favorites-card-content">
+            <h3 class="favorites-card-headline">@Model.Name</h3>
+            <p class="favorites-card-text">@Model.City, @Model.Country</p>
+            <p class="favorites-card-text">⭐ @Model.Rating.ToString("0.0") | @Localizer["GPA"] @Model.AverageGpa.ToString("0.00")</p>
+        </div>
+        <div class="favorites-card-sidebar"></div>
+    </a>
+</div>

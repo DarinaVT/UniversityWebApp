@@ -1,0 +1,82 @@
+﻿@model List<UniWebApp.ViewModels.AdminUserListViewModel>
+@using Microsoft.Extensions.Localization
+@using UniWebApp.Resources
+@inject IStringLocalizer<SharedResource> Localizer
+@{
+    Layout = "~/Views/Admin/Shared/_AdminLayout.cshtml";
+    ViewData["Title"] = Localizer["Users"].Value;
+}
+
+@Html.AntiForgeryToken()
+
+<h2>@Localizer["Users"]</h2>
+
+<table class="table table-bordered admin-table">
+    <thead>
+        <tr>
+            <th>@Localizer["EmailLabel"]</th>
+            <th>@Localizer["Registered"]</th>
+            <th>@Localizer["Reviews"]</th>
+            <th>@Localizer["Favorites"]</th>
+            <th>@Localizer["Actions"]</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var u in Model)
+        {
+            <tr id="user-row-@u.Id">
+                <td>@u.Email</td>
+                <td>@u.CreatedAt.ToShortDateString()</td>
+                <td>@u.ReviewsCount</td>
+                <td>@u.FavouritesCount</td>
+                <td>
+                    <a asp-controller="AdminUser" asp-action="Details" asp-route-id="@u.Id" class="btn btn-sm btn-primary">
+                        <i class="bi bi-eye"></i> @Localizer["View"]
+                    </a>
+                    <button class="btn btn-sm btn-danger delete-user-btn" data-user-id="@u.Id" data-user-email="@u.Email">
+                        <i class="bi bi-trash"></i> @Localizer["Delete"]
+                    </button>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+@section Scripts {
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const deleteUserMessage = '@Html.Raw(Localizer["AreYouSureDeleteUser", "{0}"])';
+            const errorDeletingUser = '@Localizer["ErrorDeletingUser"]';
+            
+            document.querySelectorAll(".delete-user-btn").forEach(btn => {
+                btn.addEventListener("click", async function() {
+                    const userId = this.dataset.userId;
+                    const userEmail = this.dataset.userEmail;
+                    
+                    const deleteMessage = deleteUserMessage.replace('{0}', userEmail);
+                    if (!confirm(deleteMessage)) {
+                        return;
+                    }
+                    
+                    try {
+                        const response = await fetch(`/AdminUser/Delete?id=${userId}`, {
+                            method: "POST",
+                            headers: {
+                                "RequestVerificationToken": document.querySelector('input[name="__RequestVerificationToken"]')?.value || ""
+                            }
+                        });
+                        
+                        if (response.ok) {
+                            document.getElementById(`user-row-${userId}`).remove();
+                        } else {
+                            alert(errorDeletingUser);
+                        }
+                    } catch (error) {
+                        console.error("Error deleting user:", error);
+                        alert(errorDeletingUser);
+                    }
+                });
+            });
+        });
+    </script>
+}

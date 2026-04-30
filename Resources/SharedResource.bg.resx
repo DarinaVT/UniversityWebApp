@@ -1,0 +1,730 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Resources, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Resources, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <metadata name="System.Resources.ResXFileCodeGenerator" type="System.CodeDom.Compiler.GeneratedCodeAttribute">
+    <value>PublicResXFileCodeGenerator</value>
+  </metadata>
+  <data name="Home" xml:space="preserve">
+    <value>Начало</value>
+  </data>
+  <data name="Catalog" xml:space="preserve">
+    <value>Каталог</value>
+  </data>
+  <data name="Universities" xml:space="preserve">
+    <value>Университети</value>
+  </data>
+  <data name="Favorites" xml:space="preserve">
+    <value>Любими</value>
+  </data>
+  <data name="Register" xml:space="preserve">
+    <value>Регистрация</value>
+  </data>
+  <data name="Login" xml:space="preserve">
+    <value>Вход</value>
+  </data>
+  <data name="Logout" xml:space="preserve">
+    <value>Изход</value>
+  </data>
+  <data name="Profile" xml:space="preserve">
+    <value>Профил</value>
+  </data>
+  <data name="Settings" xml:space="preserve">
+    <value>Настройки</value>
+  </data>
+  <data name="Dashboard" xml:space="preserve">
+    <value>Табло</value>
+  </data>
+  <data name="FindYourPerfectUniversity" xml:space="preserve">
+    <value>Намерете своя перфектен университет</value>
+  </data>
+  <data name="SearchUniversityCountryCity" xml:space="preserve">
+    <value>Търсене на университет, държава или град...</value>
+  </data>
+  <data name="FeaturedUniversities" xml:space="preserve">
+    <value>Препоръчани университети</value>
+  </data>
+  <data name="ViewDetails" xml:space="preserve">
+    <value>Виж детайли</value>
+  </data>
+  <data name="Details" xml:space="preserve">
+    <value>Детайли</value>
+  </data>
+  <data name="Filters" xml:space="preserve">
+    <value>Филтри</value>
+  </data>
+  <data name="Country" xml:space="preserve">
+    <value>Държава</value>
+  </data>
+  <data name="City" xml:space="preserve">
+    <value>Град</value>
+  </data>
+  <data name="SortBy" xml:space="preserve">
+    <value>Сортиране по</value>
+  </data>
+  <data name="RatingHighToLow" xml:space="preserve">
+    <value>Рейтинг (Висок към Нисък)</value>
+  </data>
+  <data name="RatingLowToHigh" xml:space="preserve">
+    <value>Рейтинг (Нисък към Висок)</value>
+  </data>
+  <data name="GPAHighToLow" xml:space="preserve">
+    <value>GPA (Висок към Нисък)</value>
+  </data>
+  <data name="GPALowToHigh" xml:space="preserve">
+    <value>GPA (Нисък към Висок)</value>
+  </data>
+  <data name="NameAZ" xml:space="preserve">
+    <value>Име (А-Я)</value>
+  </data>
+  <data name="NameZA" xml:space="preserve">
+    <value>Име (Я-А)</value>
+  </data>
+  <data name="ClearFilters" xml:space="preserve">
+    <value>Изчисти филтри</value>
+  </data>
+  <data name="SearchCountry" xml:space="preserve">
+    <value>Търсене на държава...</value>
+  </data>
+  <data name="SearchCity" xml:space="preserve">
+    <value>Търсене на град...</value>
+  </data>
+  <data name="ShowingXOfYUniversities" xml:space="preserve">
+    <value>Показване на {0} - {1} от {2} университета</value>
+  </data>
+  <data name="NoUniversitiesFound" xml:space="preserve">
+    <value>Не са намерени университети, отговарящи на критериите ви.</value>
+  </data>
+  <data name="AddReview" xml:space="preserve">
+    <value>Добави ревю</value>
+  </data>
+  <data name="RemoveFromFavourites" xml:space="preserve">
+    <value>Премахни от любими</value>
+  </data>
+  <data name="AddToFavourites" xml:space="preserve">
+    <value>Добави в любими</value>
+  </data>
+  <data name="Rating" xml:space="preserve">
+    <value>Рейтинг</value>
+  </data>
+  <data name="AverageGPA" xml:space="preserve">
+    <value>Среден GPA</value>
+  </data>
+  <data name="FacultiesSpecialties" xml:space="preserve">
+    <value>Факултети &amp; Специалности</value>
+  </data>
+  <data name="Reviews" xml:space="preserve">
+    <value>Ревюта</value>
+  </data>
+  <data name="GPA" xml:space="preserve">
+    <value>GPA</value>
+  </data>
+  <data name="PleaseLogInToAddReview" xml:space="preserve">
+    <value>Моля &lt;a href=&quot;/Identity/Account/Login&quot;&gt;влезте&lt;/a&gt; за да добавите ревю.</value>
+  </data>
+  <data name="LogIn" xml:space="preserve">
+    <value>влезте</value>
+  </data>
+  <data name="CountriesWithMostUniversities" xml:space="preserve">
+    <value>Държави с най-много университети</value>
+  </data>
+  <data name="ExploreUniversitiesByCountry" xml:space="preserve">
+    <value>Разгледайте университети по държави</value>
+  </data>
+  <data name="UseLocalAccount" xml:space="preserve">
+    <value>Използвайте локален акаунт за вход.</value>
+  </data>
+  <data name="CreateNewAccount" xml:space="preserve">
+    <value>Създайте нов акаунт.</value>
+  </data>
+  <data name="EmailLabel" xml:space="preserve">
+    <value>Имейл</value>
+  </data>
+  <data name="PasswordLabel" xml:space="preserve">
+    <value>Парола</value>
+  </data>
+  <data name="ConfirmPasswordLabel" xml:space="preserve">
+    <value>Потвърди парола</value>
+  </data>
+  <data name="RememberMe" xml:space="preserve">
+    <value>Запомни ме?</value>
+  </data>
+  <data name="ForgotPassword" xml:space="preserve">
+    <value>Забравена парола?</value>
+  </data>
+  <data name="RegisterAsNewUser" xml:space="preserve">
+    <value>Регистрирай се като нов потребител</value>
+  </data>
+  <data name="ResendEmailConfirmation" xml:space="preserve">
+    <value>Изпрати отново потвърждение по имейл</value>
+  </data>
+  <data name="UseAnotherService" xml:space="preserve">
+    <value>Използвайте друга услуга за вход.</value>
+  </data>
+  <data name="ManageAccount" xml:space="preserve">
+    <value>Управление на акаунта</value>
+  </data>
+  <data name="Hello" xml:space="preserve">
+    <value>Здравейте</value>
+  </data>
+  <data name="InvalidLoginAttempt" xml:space="preserve">
+    <value>Невалиден опит за вход.</value>
+  </data>
+  <data name="ForgotPasswordTitle" xml:space="preserve">
+    <value>Забравена парола?</value>
+  </data>
+  <data name="EnterYourEmail" xml:space="preserve">
+    <value>Въведете вашия имейл.</value>
+  </data>
+  <data name="ResetPassword" xml:space="preserve">
+    <value>Нулиране на парола</value>
+  </data>
+  <data name="ResetPasswordTitle" xml:space="preserve">
+    <value>Нулиране на парола</value>
+  </data>
+  <data name="ResetYourPassword" xml:space="preserve">
+    <value>Нулирайте вашата парола.</value>
+  </data>
+  <data name="Reset" xml:space="preserve">
+    <value>Нулирай</value>
+  </data>
+  <data name="Add" xml:space="preserve">
+    <value>Добави</value>
+  </data>
+  <data name="Cancel" xml:space="preserve">
+    <value>Отказ</value>
+  </data>
+  <data name="Save" xml:space="preserve">
+    <value>Запази</value>
+  </data>
+  <data name="Username" xml:space="preserve">
+    <value>Потребителско име</value>
+  </data>
+  <data name="PhoneNumber" xml:space="preserve">
+    <value>Телефонен номер</value>
+  </data>
+  <data name="Password" xml:space="preserve">
+    <value>Парола</value>
+  </data>
+  <data name="ConfirmPassword" xml:space="preserve">
+    <value>Потвърди парола</value>
+  </data>
+  <data name="PasswordLengthError" xml:space="preserve">
+    <value>{0} трябва да бъде най-малко {2} и най-много {1} символа.</value>
+  </data>
+  <data name="PasswordMismatchError" xml:space="preserve">
+    <value>Паролата и потвърждението на паролата не съвпадат.</value>
+  </data>
+  <data name="PleaseChooseUsername" xml:space="preserve">
+    <value>Моля, изберете потребителско име.</value>
+  </data>
+  <data name="PleaseEnterPhoneNumber" xml:space="preserve">
+    <value>Моля, въведете телефонен номер.</value>
+  </data>
+  <data name="PleaseEnterPassword" xml:space="preserve">
+    <value>Моля, въведете парола.</value>
+  </data>
+  <data name="PleaseConfirmPassword" xml:space="preserve">
+    <value>Моля, потвърдете паролата.</value>
+  </data>
+  <data name="ChangePassword" xml:space="preserve">
+    <value>Промяна на парола</value>
+  </data>
+  <data name="OldPassword" xml:space="preserve">
+    <value>Стара парола</value>
+  </data>
+  <data name="NewPassword" xml:space="preserve">
+    <value>Нова парола</value>
+  </data>
+  <data name="UpdatePassword" xml:space="preserve">
+    <value>Актуализирай парола</value>
+  </data>
+  <data name="PleaseEnterOldPassword" xml:space="preserve">
+    <value>Моля, въведете старата си парола.</value>
+  </data>
+  <data name="PleaseEnterNewPassword" xml:space="preserve">
+    <value>Моля, въведете новата си парола.</value>
+  </data>
+  <data name="PleaseConfirmNewPassword" xml:space="preserve">
+    <value>Моля, потвърдете новата си парола.</value>
+  </data>
+  <data name="ManageEmail" xml:space="preserve">
+    <value>Управление на имейл</value>
+  </data>
+  <data name="ChangeEmail" xml:space="preserve">
+    <value>Промяна на имейл</value>
+  </data>
+  <data name="NewEmail" xml:space="preserve">
+    <value>Нов имейл</value>
+  </data>
+  <data name="PleaseEnterEmail" xml:space="preserve">
+    <value>Моля, въведете вашия имейл.</value>
+  </data>
+  <data name="PleaseEnterNewEmail" xml:space="preserve">
+    <value>Моля, въведете нов имейл.</value>
+  </data>
+  <data name="SendVerificationEmail" xml:space="preserve">
+    <value>Изпрати имейл за потвърждение</value>
+  </data>
+  <data name="ExternalLogins" xml:space="preserve">
+    <value>Външни входове</value>
+  </data>
+  <data name="TwoFactorAuthentication" xml:space="preserve">
+    <value>Двуфакторна автентификация</value>
+  </data>
+  <data name="PersonalData" xml:space="preserve">
+    <value>Лични данни</value>
+  </data>
+  <data name="Required" xml:space="preserve">
+    <value>Полето {0} е задължително.</value>
+  </data>
+  <data name="EmailAddress" xml:space="preserve">
+    <value>Полето {0} не е валиден имейл адрес.</value>
+  </data>
+  <data name="ExploreProgramsAndFacilities" xml:space="preserve">
+    <value>Разгледайте програми и съоръжения. Открийте бъдещето си тук.</value>
+  </data>
+  <data name="WhatDoYouWantToLearn" xml:space="preserve">
+    <value>Какво искате да научите?</value>
+  </data>
+  <data name="Search" xml:space="preserve">
+    <value>Търсене</value>
+  </data>
+  <data name="Name" xml:space="preserve">
+    <value>Име</value>
+  </data>
+  <data name="Users" xml:space="preserve">
+    <value>Потребители</value>
+  </data>
+  <data name="Overview" xml:space="preserve">
+    <value>Общ преглед</value>
+  </data>
+  <data name="UniversityInformation" xml:space="preserve">
+    <value>Информация за университета</value>
+  </data>
+  <data name="TotalReviews" xml:space="preserve">
+    <value>Общо ревюта</value>
+  </data>
+  <data name="Location" xml:space="preserve">
+    <value>Местоположение</value>
+  </data>
+  <data name="AllMajors" xml:space="preserve">
+    <value>Всички специалности</value>
+  </data>
+  <data name="DiscoverMajorsDescription" xml:space="preserve">
+    <value>Открийте специалностите и програмите, предлагани от този университет, и видовете дипломи, които се присъждат.</value>
+  </data>
+  <data name="Bachelors" xml:space="preserve">
+    <value>Бакалавър</value>
+  </data>
+  <data name="Graduates" xml:space="preserve">
+    <value>Завършили</value>
+  </data>
+  <data name="NoOnline" xml:space="preserve">
+    <value>Не онлайн</value>
+  </data>
+  <data name="Edit" xml:space="preserve">
+    <value>Редактирай</value>
+  </data>
+  <data name="Share" xml:space="preserve">
+    <value>Сподели</value>
+  </data>
+  <data name="UniversityComparison" xml:space="preserve">
+    <value>Сравнение на университети</value>
+  </data>
+  <data name="TotalUniversities" xml:space="preserve">
+    <value>Общо университети</value>
+  </data>
+  <data name="TotalUsers" xml:space="preserve">
+    <value>Общо потребители</value>
+  </data>
+  <data name="PendingReviews" xml:space="preserve">
+    <value>Чакащи ревюта</value>
+  </data>
+  <data name="AllUniversities" xml:space="preserve">
+    <value>Всички университети</value>
+  </data>
+  <data name="RegisteredUsers" xml:space="preserve">
+    <value>Регистрирани потребители</value>
+  </data>
+  <data name="AwaitingApproval" xml:space="preserve">
+    <value>Чакащи одобрение</value>
+  </data>
+  <data name="CountriesCovered" xml:space="preserve">
+    <value>Покрити държави</value>
+  </data>
+  <data name="ViewsToday" xml:space="preserve">
+    <value>Прегледи днес</value>
+  </data>
+  <data name="ViewsThisWeek" xml:space="preserve">
+    <value>Прегледи тази седмица</value>
+  </data>
+  <data name="ViewsThisMonth" xml:space="preserve">
+    <value>Прегледи този месец</value>
+  </data>
+  <data name="UniversitiesMap" xml:space="preserve">
+    <value>Карта на университетите</value>
+  </data>
+  <data name="ActivityBreakdown" xml:space="preserve">
+    <value>Разбивка на дейността</value>
+  </data>
+  <data name="Today" xml:space="preserve">
+    <value>Днес</value>
+  </data>
+  <data name="ThisWeek" xml:space="preserve">
+    <value>Тази седмица</value>
+  </data>
+  <data name="ThisMonth" xml:space="preserve">
+    <value>Този месец</value>
+  </data>
+  <data name="Total" xml:space="preserve">
+    <value>Общо</value>
+  </data>
+  <data name="Search" xml:space="preserve">
+    <value>Търсене...</value>
+  </data>
+  <data name="Actions" xml:space="preserve">
+    <value>Действия</value>
+  </data>
+  <data name="Delete" xml:space="preserve">
+    <value>Изтрий</value>
+  </data>
+  <data name="AreYouSureDelete" xml:space="preserve">
+    <value>Сигурни ли сте, че искате да изтриете този университет?</value>
+  </data>
+  <data name="Previous" xml:space="preserve">
+    <value>Предишна</value>
+  </data>
+  <data name="Next" xml:space="preserve">
+    <value>Следваща</value>
+  </data>
+  <data name="ShowingXToYOfZ" xml:space="preserve">
+    <value>Показване на {0} до {1} от {2} университета</value>
+  </data>
+  <data name="NoUniversitiesFoundMatching" xml:space="preserve">
+    <value>Не са намерени университети, отговарящи на търсенето ви.</value>
+  </data>
+  <data name="NoUniversitiesFound" xml:space="preserve">
+    <value>Не са намерени университети.</value>
+  </data>
+  <data name="ExitToSite" xml:space="preserve">
+    <value>Изход към сайта</value>
+  </data>
+  <data name="Registered" xml:space="preserve">
+    <value>Регистриран</value>
+  </data>
+  <data name="View" xml:space="preserve">
+    <value>Преглед</value>
+  </data>
+  <data name="Approve" xml:space="preserve">
+    <value>Одобри</value>
+  </data>
+  <data name="Reject" xml:space="preserve">
+    <value>Отхвърли</value>
+  </data>
+  <data name="Comment" xml:space="preserve">
+    <value>Коментар</value>
+  </data>
+  <data name="AreYouSureDeleteUser" xml:space="preserve">
+    <value>Сигурни ли сте, че искате да изтриете потребител: {0}? Това действие не може да бъде отменено.</value>
+  </data>
+  <data name="ErrorDeletingUser" xml:space="preserve">
+    <value>Грешка при изтриване на потребител</value>
+  </data>
+  <data name="UserDetails" xml:space="preserve">
+    <value>Детайли за потребител</value>
+  </data>
+  <data name="UserId" xml:space="preserve">
+    <value>ID на потребител</value>
+  </data>
+  <data name="ReviewsCount" xml:space="preserve">
+    <value>Брой ревюта</value>
+  </data>
+  <data name="FavouritesCount" xml:space="preserve">
+    <value>Брой любими</value>
+  </data>
+  <data name="BackToUsers" xml:space="preserve">
+    <value>Назад към потребители</value>
+  </data>
+  <data name="DeleteUser" xml:space="preserve">
+    <value>Изтрий потребител</value>
+  </data>
+  <data name="EnterNewPasswordForUser" xml:space="preserve">
+    <value>Въведете нова парола за този потребител</value>
+  </data>
+  <data name="NewPasswordMinCharacters" xml:space="preserve">
+    <value>Нова парола (мин. 6 символа)</value>
+  </data>
+  <data name="AreYouSureChangePassword" xml:space="preserve">
+    <value>Сигурни ли сте, че искате да промените паролата на този потребител?</value>
+  </data>
+  <data name="PasswordChangedSuccessfully" xml:space="preserve">
+    <value>Паролата е променена успешно</value>
+  </data>
+  <data name="PasswordMustBeAtLeast6Characters" xml:space="preserve">
+    <value>Паролата трябва да бъде поне 6 символа</value>
+  </data>
+  <data name="ErrorChangingPassword" xml:space="preserve">
+    <value>Грешка при промяна на парола</value>
+  </data>
+  <data name="FailedToChangePassword" xml:space="preserve">
+    <value>Неуспешна промяна на парола</value>
+  </data>
+  <data name="EditUniversity" xml:space="preserve">
+    <value>Редактиране на университет</value>
+  </data>
+  <data name="AddUniversity" xml:space="preserve">
+    <value>Добави университет</value>
+  </data>
+  <data name="ImageURL" xml:space="preserve">
+    <value>URL на изображение</value>
+  </data>
+  <data name="PersonalDetails" xml:space="preserve">
+    <value>Лични данни</value>
+  </data>
+  <data name="DisplayName" xml:space="preserve">
+    <value>Показвано име</value>
+  </data>
+  <data name="CurrentEmail" xml:space="preserve">
+    <value>Текущ имейл</value>
+  </data>
+  <data name="ChangeYourPassword" xml:space="preserve">
+    <value>Променете паролата си</value>
+  </data>
+  <data name="CurrentPassword" xml:space="preserve">
+    <value>Текуща парола</value>
+  </data>
+  <data name="ConfirmNewPassword" xml:space="preserve">
+    <value>Потвърди нова парола</value>
+  </data>
+  <data name="SaveChanges" xml:space="preserve">
+    <value>Запази промените</value>
+  </data>
+  <data name="Email" xml:space="preserve">
+    <value>Имейл</value>
+  </data>
+  <data name="ApprovedReviews" xml:space="preserve">
+    <value>Одобрени ревюта</value>
+  </data>
+  <data name="Approved" xml:space="preserve">
+    <value>Одобрени</value>
+  </data>
+  <data name="Pending" xml:space="preserve">
+    <value>Чакащи</value>
+  </data>
+  <data name="Favourites" xml:space="preserve">
+    <value>Любими</value>
+  </data>
+  <data name="University" xml:space="preserve">
+    <value>Университет</value>
+  </data>
+  <data name="Date" xml:space="preserve">
+    <value>Дата</value>
+  </data>
+  <data name="Status" xml:space="preserve">
+    <value>Статус</value>
+  </data>
+  <data name="CreateAnAccount" xml:space="preserve">
+    <value>Създайте акаунт</value>
+  </data>
+  <data name="AlreadyHaveAccount" xml:space="preserve">
+    <value>Вече имате акаунт?</value>
+  </data>
+  <data name="EmailAddressDisplay" xml:space="preserve">
+    <value>Имейл адрес</value>
+  </data>
+  <data name="Show" xml:space="preserve">
+    <value>Покажи</value>
+  </data>
+  <data name="Hide" xml:space="preserve">
+    <value>Скрий</value>
+  </data>
+  <data name="Use8OrMore" xml:space="preserve">
+    <value>Използвайте 8 или повече символа със смесица от букви, цифри и символи</value>
+  </data>
+  <data name="ByCreatingAccount" xml:space="preserve">
+    <value>Създавайки акаунт, вие се съгласявате с нашите</value>
+  </data>
+  <data name="TermsOfUse" xml:space="preserve">
+    <value>Условия за използване</value>
+  </data>
+  <data name="PrivacyPolicy" xml:space="preserve">
+    <value>Политика за поверителност</value>
+  </data>
+  <data name="And" xml:space="preserve">
+    <value>и</value>
+  </data>
+  <data name="NewToUniWebApp" xml:space="preserve">
+    <value>Нов в UniWebApp?</value>
+  </data>
+  <data name="SignUpForFree" xml:space="preserve">
+    <value>Регистрирайте се безплатно</value>
+  </data>
+  <data name="LogIn" xml:space="preserve">
+    <value>Влез</value>
+  </data>
+  <data name="ForgotPasswordQuestion" xml:space="preserve">
+    <value>Забравена парола?</value>
+  </data>
+  <data name="DontHaveAccountYet" xml:space="preserve">
+    <value>Нямате акаунт още?</value>
+  </data>
+  <data name="RegisterHere" xml:space="preserve">
+    <value>Регистрирайте се тук</value>
+  </data>
+  <data name="Login" xml:space="preserve">
+    <value>Вход</value>
+  </data>
+  <data name="Register" xml:space="preserve">
+    <value>Регистрация</value>
+  </data>
+  <data name="Optional" xml:space="preserve">
+    <value>По избор</value>
+  </data>
+  <data name="UploadImageOrUseURL" xml:space="preserve">
+    <value>Качете изображение или използвайте URL по-долу</value>
+  </data>
+  <data name="OrEnterImageURL" xml:space="preserve">
+    <value>Или въведете URL на изображение</value>
+  </data>
+  <data name="Image" xml:space="preserve">
+    <value>Изображение</value>
+  </data>
+  <data name="EnableOrDisable2FA" xml:space="preserve">
+    <value>Активирайте или деактивирайте 2FA за допълнителна сигурност</value>
+  </data>
+  <data name="Manage2FA" xml:space="preserve">
+    <value>Управление на 2FA</value>
+  </data>
+  <data name="SetupAuthenticator" xml:space="preserve">
+    <value>Настройка на удостоверител</value>
+  </data>
+  <data name="DownloadOrDeletePersonalData" xml:space="preserve">
+    <value>Изтеглете или изтрийте вашите лични данни</value>
+  </data>
+  <data name="Warning" xml:space="preserve">
+    <value>Предупреждение</value>
+  </data>
+  <data name="DeletingDataWillPermanentlyRemoveAccount" xml:space="preserve">
+    <value>Изтриването на вашите данни ще премахне завинаги вашия акаунт.</value>
+  </data>
+  <data name="DownloadMyData" xml:space="preserve">
+    <value>Изтегли моите данни</value>
+  </data>
+  <data name="DeleteMyAccount" xml:space="preserve">
+    <value>Изтрий моя акаунт</value>
+  </data>
+  <data name="Rating" xml:space="preserve">
+    <value>Рейтинг</value>
+  </data>
+  <data name="AdministratorsCannotSubmitReviews" xml:space="preserve">
+    <value>Администраторите не могат да подават ревюта. Използвайте администраторското табло за управление на ревюта.</value>
+  </data>
+  <data name="ProfileUpdated" xml:space="preserve">
+    <value>Вашият профил е актуализиран</value>
+  </data>
+  <data name="All" xml:space="preserve">
+    <value>Всички</value>
+  </data>
+  <data name="Approve" xml:space="preserve">
+    <value>Одобри</value>
+  </data>
+  <data name="Reject" xml:space="preserve">
+    <value>Отхвърли</value>
+  </data>
+  <data name="PendingReviews" xml:space="preserve">
+    <value>Чакащи ревюта</value>
+  </data>
+  <data name="NoPendingReviews" xml:space="preserve">
+    <value>Няма чакащи ревюта за този университет.</value>
+  </data>
+  <data name="User" xml:space="preserve">
+    <value>Потребител</value>
+  </data>
+  <data name="AddReview" xml:space="preserve">
+    <value>Добави ревю</value>
+  </data>
+  <data name="SelectRating" xml:space="preserve">
+    <value>Избери оценка</value>
+  </data>
+  <data name="YourOpinion" xml:space="preserve">
+    <value>Вашето мнение...</value>
+  </data>
+  <data name="SubmitReview" xml:space="preserve">
+    <value>Изпрати ревю</value>
+  </data>
+  <data name="PleaseFillAllFields" xml:space="preserve">
+    <value>Моля, попълнете всички полета</value>
+  </data>
+  <data name="ReviewSubmitted" xml:space="preserve">
+    <value>Ревюто е изпратено и чака одобрение.</value>
+  </data>
+  <data name="ErrorSubmittingReview" xml:space="preserve">
+    <value>Грешка при изпращане на ревю. Моля, опитайте отново.</value>
+  </data>
+  <data name="AddToFavourites" xml:space="preserve">
+    <value>Добави в любими</value>
+  </data>
+  <data name="RemoveFromFavourites" xml:space="preserve">
+    <value>Премахни от любими</value>
+  </data>
+  <data name="ConfirmRemoveFavourite" xml:space="preserve">
+    <value>Сигурни ли сте, че искате да премахнете този университет от вашите любими?</value>
+  </data>
+</root>

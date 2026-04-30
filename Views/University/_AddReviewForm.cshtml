@@ -1,0 +1,37 @@
+﻿@model UniWebApp.ViewModels.University.AddReviewViewModel
+@inject Microsoft.Extensions.Localization.IStringLocalizer<UniWebApp.Resources.SharedResource> Localizer
+
+<form id="addReviewForm" class="card p-3 mt-4" 
+      data-please-fill-all="@Localizer["PleaseFillAllFields"]"
+      data-review-submitted="@Localizer["ReviewSubmitted"]"
+      data-error-submitting="@Localizer["ErrorSubmittingReview"]">
+    <h5 class="mb-3">@Localizer["AddReview"]</h5>
+
+    <input type="hidden" name="UniversityId" value="@Model.UniversityId" />
+
+    <div class="mb-3">
+        <label class="form-label">@Localizer["Rating"] (1–5)</label>
+        <select name="Rating" class="form-select" required>
+            <option value="">@Localizer["SelectRating"]</option>
+            @for (int i = 1; i <= 5; i++)
+            {
+                <option value="@i">@i</option>
+            }
+        </select>
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">@Localizer["Comment"]</label>
+        <textarea name="Comment"
+                  class="form-control"
+                  rows="4"
+                  placeholder="@Localizer["YourOpinion"]"
+                  required></textarea>
+    </div>
+
+    <button type="submit" class="btn btn-primary">
+        @Localizer["SubmitReview"]
+    </button>
+
+    <div id="review-result" class="mt-2"></div>
+</form>

@@ -1,0 +1,30 @@
+﻿@model UniWebApp.ViewModels.Catalog.CatalogIndexViewModel
+
+<nav>
+    <ul class="pagination justify-content-center">
+        @if (Model.Page > 1)
+        {
+            <li class="page-item">
+                <a href="#" class="page-link" data-page="@(Model.Page - 1)" aria-label="Previous">
+                    <span aria-hidden="true">&laquo;</span>
+                </a>
+            </li>
+        }
+        
+        @for (int i = Math.Max(1, Model.Page - 2); i <= Math.Min(Model.TotalPages, Model.Page + 2); i++)
+        {
+            <li class="page-item @(i == Model.Page ? "active" : "")">
+                <a href="#" class="page-link" data-page="@i">@i</a>
+            </li>
+        }
+        
+        @if (Model.Page < Model.TotalPages)
+        {
+            <li class="page-item">
+                <a href="#" class="page-link" data-page="@(Model.Page + 1)" aria-label="Next">
+                    <span aria-hidden="true">&raquo;</span>
+                </a>
+            </li>
+        }
+    </ul>
+</nav>

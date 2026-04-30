@@ -1,0 +1,78 @@
+
+<div class="modal fade" id="loginRegisterModal" tabindex="-1" aria-labelledby="loginRegisterModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-xl">
+        <div class="modal-content login-register-modal-content">
+            <div class="modal-header border-0 pb-0 position-absolute top-0 end-0" style="z-index: 10; background: none !important;">
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close" style="background: none; opacity: 1; filter: brightness(0) invert(1);"></button>
+            </div>
+            <div class="modal-body p-0">
+                <div class="row g-0 h-100">
+                    
+                    <div class="col-md-6 login-register-left">
+                        <div class="login-register-background"></div>
+                    </div>
+                    
+                    
+                    <div class="col-md-6 login-register-right d-flex align-items-center">
+                        <div class="w-100 p-5">
+                            <h3 class="mb-4">@Localizer["LogIn"]</h3>
+                            
+                            <form asp-area="Identity" asp-page="/Account/Login" method="post" class="login-modal-form">
+                                <input type="hidden" name="returnUrl" value="@Context.Request.Path" />
+                                
+                                <div asp-validation-summary="ModelOnly" class="text-danger mb-3" role="alert"></div>
+                                
+                                <div class="mb-3">
+                                    <label for="Input_Email" class="form-label">@Localizer["EmailAddressDisplay"]</label>
+                                    <input type="email" 
+                                           id="Input_Email" 
+                                           name="Input.Email" 
+                                           class="form-control" 
+                                           autocomplete="username" 
+                                           aria-required="true" 
+                                           required />
+                                </div>
+
+                                <div class="mb-3">
+                                    <label for="Input_Password" class="form-label">@Localizer["Password"]</label>
+                                    <input type="password" 
+                                           id="Input_Password" 
+                                           name="Input.Password" 
+                                           class="form-control" 
+                                           autocomplete="current-password" 
+                                           aria-required="true" 
+                                           required />
+                                </div>
+
+                                <div class="mb-3 form-check">
+                                    <input type="checkbox" 
+                                           id="Input_RememberMe" 
+                                           name="Input.RememberMe" 
+                                           class="form-check-input" />
+                                    <label class="form-check-label remember-me-label" for="Input_RememberMe">
+                                        @Localizer["RememberMe"]
+                                    </label>
+                                </div>
+
+                                <button type="submit" class="btn btn-primary w-100 mb-3 login-register-btn" style="background-color: var(--primary-color); border-color: var(--primary-color);">
+                                    @Localizer["LogIn"]
+                                </button>
+                            </form>
+                            
+                            <div class="text-center">
+                                <a asp-area="Identity" asp-page="/Account/ForgotPassword" class="text-muted small">@Localizer["ForgotPasswordQuestion"]</a>
+                            </div>
+                            
+                            <hr class="my-4" />
+                            
+                            <p class="text-center text-muted mb-0">
+                                @Localizer["DontHaveAccountYet"] 
+                                <a asp-area="Identity" asp-page="/Account/Register" class="text-primary fw-bold">@Localizer["RegisterHere"]</a>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

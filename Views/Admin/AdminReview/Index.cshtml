@@ -1,0 +1,40 @@
+﻿@model IEnumerable<Models.Entities.Review>
+@using Services
+@inject ILocalizationService LocalizationService
+@{
+    Layout = "~/Views/Admin/Shared/_AdminLayout.cshtml";
+    ViewData["Title"] = Localizer["Reviews"].Value;
+}
+
+<h2>@Localizer["PendingReviews"]</h2>
+
+@section Scripts {
+    <script src="~/js/admin-review.js" asp-append-version="true"></script>
+}
+
+<table class="table table-bordered admin-table">
+    <thead>
+        <tr>
+            <th>@Localizer["Universities"]</th>
+            <th>@Localizer["Users"]</th>
+            <th>@Localizer["Rating"]</th>
+            <th>@Localizer["Comment"]</th>
+            <th>@Localizer["Actions"]</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var r in Model)
+        {
+            <tr id="review-@r.Id">
+                <td>@LocalizationService.GetLocalizedName(r.University.Name, "university")</td>
+                <td>@r.User.UserName</td>
+                <td>@r.Rating</td>
+                <td>@r.Comment</td>
+                <td>
+                    <button class="btn btn-success btn-approve" data-id="@r.Id">@Localizer["Approve"]</button>
+                    <button class="btn btn-danger btn-reject" data-id="@r.Id">@Localizer["Reject"]</button>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

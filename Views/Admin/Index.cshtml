@@ -1,0 +1,154 @@
+﻿@model UniWebApp.ViewModels.AdminDashboardViewModel
+@{
+    Layout = "~/Views/Admin/Shared/_AdminLayout.cshtml";
+    ViewData["Title"] = Localizer["Dashboard"].Value;
+}
+
+
+<div class="admin-stats-grid">
+    <div class="admin-stat-card">
+        <div class="admin-stat-header">
+            <h3 class="admin-stat-title">@Localizer["TotalUniversities"]</h3>
+            <div class="admin-stat-icon primary">
+                <i class="bi bi-mortarboard-fill"></i>
+            </div>
+        </div>
+        <div class="admin-stat-value">@Model.UniversitiesCount</div>
+        <div class="admin-stat-change positive">
+            <i class="bi bi-arrow-up"></i>
+            <span>@Localizer["AllUniversities"]</span>
+        </div>
+    </div>
+
+    <div class="admin-stat-card">
+        <div class="admin-stat-header">
+            <h3 class="admin-stat-title">@Localizer["TotalUsers"]</h3>
+            <div class="admin-stat-icon success">
+                <i class="bi bi-people-fill"></i>
+            </div>
+        </div>
+        <div class="admin-stat-value">@Model.UsersCount</div>
+        <div class="admin-stat-change positive">
+            <i class="bi bi-arrow-up"></i>
+            <span>@Localizer["RegisteredUsers"]</span>
+        </div>
+    </div>
+
+    <div class="admin-stat-card">
+        <div class="admin-stat-header">
+            <h3 class="admin-stat-title">@Localizer["PendingReviews"]</h3>
+            <div class="admin-stat-icon warning">
+                <i class="bi bi-chat-square-text"></i>
+            </div>
+        </div>
+        <div class="admin-stat-value">@Model.PendingReviews</div>
+        <div class="admin-stat-change">
+            <span>@Localizer["AwaitingApproval"]</span>
+        </div>
+    </div>
+
+    <div class="admin-stat-card">
+        <div class="admin-stat-header">
+            <h3 class="admin-stat-title">@Localizer["Country"]</h3>
+            <div class="admin-stat-icon primary">
+                <i class="bi bi-globe"></i>
+            </div>
+        </div>
+        <div class="admin-stat-value">@Model.CountriesCount</div>
+        <div class="admin-stat-change positive">
+            <i class="bi bi-arrow-up"></i>
+            <span>@Localizer["CountriesCovered"]</span>
+        </div>
+    </div>
+</div>
+
+
+<div class="admin-circle-charts">
+    <div class="admin-circle-chart-card">
+        <div class="admin-circle-chart-container">
+            <canvas id="viewsTodayChart"></canvas>
+        </div>
+        <div class="admin-circle-chart-label">@Localizer["ViewsToday"]</div>
+        <div class="admin-circle-chart-value">@Model.ViewsToday</div>
+    </div>
+
+    <div class="admin-circle-chart-card">
+        <div class="admin-circle-chart-container">
+            <canvas id="viewsWeekChart"></canvas>
+        </div>
+        <div class="admin-circle-chart-label">@Localizer["ViewsThisWeek"]</div>
+        <div class="admin-circle-chart-value">@Model.ViewsThisWeek</div>
+    </div>
+
+    <div class="admin-circle-chart-card">
+        <div class="admin-circle-chart-container">
+            <canvas id="viewsMonthChart"></canvas>
+        </div>
+        <div class="admin-circle-chart-label">@Localizer["ViewsThisMonth"]</div>
+        <div class="admin-circle-chart-value">@Model.ViewsThisMonth</div>
+    </div>
+</div>
+
+
+<div style="display: grid; grid-template-columns: 2fr 1fr; gap: 1.5rem; margin-bottom: 2rem;">
+    
+    <div class="admin-map-container">
+        <h3><i class="bi bi-geo-alt-fill me-2"></i>@Localizer["UniversitiesMap"]</h3>
+        <div id="adminWorldMap" class="admin-map"></div>
+    </div>
+
+    
+    <div class="admin-map-container">
+        <h3><i class="bi bi-bar-chart-fill me-2"></i>@Localizer["ActivityBreakdown"]</h3>
+        <div style="margin-top: 1rem;">
+            <div style="margin-bottom: 1.5rem;">
+                <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
+                    <span>@Localizer["Today"]</span>
+                    <span style="font-weight: 600;">@Model.ViewsToday</span>
+                </div>
+                <div style="height: 8px; background-color: #E5E7EB; border-radius: 4px; overflow: hidden;">
+                    <div style="height: 100%; background-color: #2563EB; width: @(Model.TotalViews > 0 ? (Model.ViewsToday * 100 / Model.TotalViews) : 0)%;"></div>
+                </div>
+            </div>
+            <div style="margin-bottom: 1.5rem;">
+                <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
+                    <span>@Localizer["ThisWeek"]</span>
+                    <span style="font-weight: 600;">@Model.ViewsThisWeek</span>
+                </div>
+                <div style="height: 8px; background-color: #E5E7EB; border-radius: 4px; overflow: hidden;">
+                    <div style="height: 100%; background-color: #10B981; width: @(Model.TotalViews > 0 ? (Model.ViewsThisWeek * 100 / Model.TotalViews) : 0)%;"></div>
+                </div>
+            </div>
+            <div style="margin-bottom: 1.5rem;">
+                <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
+                    <span>@Localizer["ThisMonth"]</span>
+                    <span style="font-weight: 600;">@Model.ViewsThisMonth</span>
+                </div>
+                <div style="height: 8px; background-color: #E5E7EB; border-radius: 4px; overflow: hidden;">
+                    <div style="height: 100%; background-color: #7C3AED; width: @(Model.TotalViews > 0 ? (Model.ViewsThisMonth * 100 / Model.TotalViews) : 0)%;"></div>
+                </div>
+            </div>
+            <div>
+                <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
+                    <span>@Localizer["Total"]</span>
+                    <span style="font-weight: 600;">@Model.TotalViews</span>
+                </div>
+                <div style="height: 8px; background-color: #E5E7EB; border-radius: 4px; overflow: hidden;">
+                    <div style="height: 100%; background-color: #F59E0B; width: 100%;"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        window.viewsData = {
+            today: @Model.ViewsToday,
+            week: @Model.ViewsThisWeek,
+            month: @Model.ViewsThisMonth,
+            total: @Model.TotalViews
+        };
+    </script>
+    <script src="~/js/admin-dashboard.js" asp-append-version="true"></script>
+}
