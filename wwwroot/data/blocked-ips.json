@@ -1,0 +1,9 @@
+{
+  "BlockedIps": [
+    "90.154.209.90"
+
+  ],
+  "LastUpdated": "2026-01-03T00:00:00Z",
+  "Note": "Add spam IP addresses here. Supports individual IPs (e.g., '192.168.1.100') and CIDR ranges (e.g., '10.0.0.0/8'). See IP_BLOCKING_GUIDE.md for sources of spam IP lists."
+}
+//"127.0.0.1" - localhost ip to use
